@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  Basic
+  Premium
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String    @unique //required
+  userId         String    @unique //required
+  bio            String?
+  location       String?
+  birthDate      DateTime?
+  coverImage     String?
+  accountType    Role      @default(Basic)
+  image          String?   @default("https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg")
+  emailVerified  DateTime?
+  hashedPassword String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  followers      Int       @default(0)
+  following      Int       @default(0)
+
+  posts    Post[]
+  likes    Like[]
+  comments Comment[]
+}
+
+model Like {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId String @db.ObjectId
+  postId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Comment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  message String?
+  userId  String  @db.ObjectId
+  postId  String  @db.ObjectId
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post    Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Settings {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  email String
+}
+
+model Post {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  content       String
+  images        String[]
+  createdAt     DateTime  @default(now())
+  likesCount    Int       @default(0)
+  commentsCount Int       @default(0)
+  repostsCount  Int       @default(0)
+  userId        String    @db.ObjectId
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comments      Comment[]
+  likes         Like[]
+  hashtags      Hashtag[]
+}
+
+model Hashtag {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  postId          String   @db.ObjectId
+  name            String    @unique
+  description     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  active          Boolean  @default(true)
+  usageCount      Int      @default(0)
+  relatedHashtags String[]
+  trending        Boolean  @default(false)
+  Post            Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
