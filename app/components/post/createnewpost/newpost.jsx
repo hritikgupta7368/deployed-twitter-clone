@@ -158,7 +158,7 @@ const Newpost = () => {
   
 
   return (
-    <div className="  pb-2 w-full min-h-[150px]">
+    <div className=" pb-2 w-full min-h-[150px]">
       <div className=" max-w-[94%] w-[94%]">
         <textarea
           name="content"

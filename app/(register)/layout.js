@@ -13,7 +13,7 @@ export default function RootLayout() {
   
   return (
     <html lang="en">
-      <body className="bg-black relative">
+      <body className="bg-black relative sm:max-h-[865px] sm:max-w-[375px]">
       <SessionProvider>
         {!registermodalVisible && loginmodalVisible && (
           <div className=" absolute w-full h-full bg-slate-700/55">

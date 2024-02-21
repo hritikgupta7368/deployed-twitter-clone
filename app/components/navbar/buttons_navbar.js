@@ -26,7 +26,7 @@ function Button_PremiumCard({ src, label, key }) {
     return (
       <div
         onClick={() => handleModal("premium")}
-        className="h-[50.25px] w-[259px] max-h-[50.25px]  max-w-[259px]"
+        className="hidden h-[50.25px] w-[259px] max-h-[50.25px]  max-w-[259px]"
         key={key}
       >
         <div className="w-full h-full rounded-3xl hover:bg-[#16181c] duration-200">
@@ -156,7 +156,7 @@ function Edit_profile(){
   const { isModalOpen , handleModal ,modalType} = useModal();
   return(
   
-    <button  onClick={() => {handleModal('editprofile')}} className="absolute right-4 w-24 rounded-xl border-[2px] border-white">Edit profile</button>
+    <button  onClick={() => {handleModal('editprofile')}} className="absolute bottom-44 right-4 font-bold hover:opacity-65 duration-200 rounded-full border-[1px] px-4 py-1 border-gray-600">Edit profile</button>
    
   )
 }

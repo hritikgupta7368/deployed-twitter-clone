@@ -1,5 +1,4 @@
 import { links } from "@/app/constant/profile_items";
-import Banner from "@/app/components/cards/banner_card";
 import Homeposts from "@/app/components/post/posts";
 import Button_function from "@/app/utils/button_generator";
 import prisma from "@/app/lib/prismadb";
@@ -11,6 +10,7 @@ import { Trending_Card } from "@/app/components/cards/happening_card";
 import FollowRecommend_Card from "@/app/components/cards/follow_card";
 import { Edit_profile } from "@/app/components/navbar/buttons_navbar";
 import Image from "next/image";
+
 
 const Profile = async ({ params }) => {
  
@@ -50,11 +50,11 @@ const Profile = async ({ params }) => {
           </div>
 
           <div className="px-3 flex flex-row backdrop-blur-lg z-10 fixed h-[53px] w-[598px] border-x-[1px] border-b-[1px] border-[#2f3336] ">
-              <div className="w-[56px] my-auto"> back</div>
-              <div className="w-[510px] my-auto">{user?.name}</div>
+              <div className="w-[56px] my-auto"><Image src = "common/return.svg" height={20} width={20}/></div>
+              <div className="w-[510px] font-extrabold my-auto">{user?.name}</div>
           </div>
 
-          <main className="mt-[53px] flex flex-row">
+          <main className="mt-[53px] flex flex-row ">
 
             <div className="w-[598px] h-full">
               <div className="relative w-[598px] h-[423px] border-x-[1px] border-b-[1px] border-[#2f3336]">
@@ -64,23 +64,24 @@ const Profile = async ({ params }) => {
                 <main className="pt-16 pl-5">
                  <div>
                     <p className=" text-2xl font-bold">{user?.name}</p>
-                    <p className=" text-[#2f3336] font-medium">{user?.userId}</p>
+                    <p className=" text-gray-400/70 font-medium">{user?.userId}</p>
                  </div>
-                 <p>joined {user?.birthDate}</p>
-                 <div className="flex flex-row">
-                  <p>following {user?.followers}</p>
-                  <p>folloers {user?.following}</p>
+                 <p className="text-gray-400/70">joined {user?.birthDate}</p>
+                 <div className="flex flex-row gap-3 text-gray-400/70 ">
+                 <p className="hover:underline"><span className="text-white font-medium">{user?.following}</span> Following </p>
+                  <p className="hover:underline"><span className="text-white font-medium">{user?.followers}</span> Followers </p>
                  </div>
                 </main>
                 <div className="flex flex-row"> {Button_function(links)}</div>
+                <Homeposts />
               </div>
-              <Homeposts />
+             
             </div>
 
 
-            <div className="sticky top-[53px] w-[408px] px-[30px]" >
-              <div><FollowRecommend_Card /></div>
-              <div><Trending_Card /></div>
+            <div className="sticky top-[53px] w-[408px] h-[800px] px-[30px]" >
+              <div className="mt-3"><FollowRecommend_Card /></div>
+              <div className="mt-3"><Trending_Card /></div>
             </div>
           </main>
         </div>

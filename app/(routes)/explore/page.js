@@ -14,7 +14,7 @@ const Explore = async() => {
 
  
   return (
-    <main className="w-full h-full pl-[275px]">
+    <main className="w-full h-full md:ml-[275px]">
         <div className = " h-full w-full overflow-y-auto">
           <div className="fixed right-5 w-[350px] top-3"> <FollowRecommend /></div>
 

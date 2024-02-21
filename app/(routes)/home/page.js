@@ -15,19 +15,19 @@ const Home = async () => {
  
 
   return (
-    <div className="ml-[275px] w-full h-full  ">
+    <div className="md:ml-[275px] w-full h-full  ">
       <section className="overscroll-none w-full h-full flex flex-row ">
-        <section className=" w-[598px] ">
+        <section className="w-full ">
           <FeedSwitcher />
 
-          <section className="w-full mt-14  border-x-[1px] border-b-[1px] border-[#2f3336]">
-            <div className="  pt-4 pl-4 flex flex-row gap-3">
+          <section className="hidden md:block w-full mt-14  border-x-[1px] border-b-[1px] border-[#2f3336]">
+            <div className="pt-4 pl-4 flex flex-row gap-3">
               <UserLogo logo = {session?.user.image}/>
               <Newpost />
             </div>
           </section>
 
-          <section className="w-[600px] h-[580px] overflow-y-auto">
+          <section className="w-full h-[580px] overflow-y-auto">
             <PostsType />
           </section>
         </section>

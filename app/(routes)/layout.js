@@ -5,6 +5,7 @@ import { authOptions } from '../api/auth/[...nextauth]/route';
 import Modals from '../components/Modals/modal';
 import { ContextProvider } from '../providers/contextprovider';
 import Navbar from '../components/navbar/navbar';
+import Navbar_test from '../components/test/1';
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions)
@@ -16,7 +17,8 @@ export default async function RootLayout({ children }) {
           <ContextProvider>
           <Modals />
           <div className="flex flex-row h-full">
-           <Navbar />
+          
+           <Navbar_test />
             {children}
           </div>
           </ContextProvider>
