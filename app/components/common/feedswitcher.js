@@ -4,10 +4,10 @@ import Image from "next/image";
 
 
 
-const userSwitchButton = () => {
+const UserSwitchButton = () => {
   return (
     <div className="w-[40px] h-[40px] bg-red-400 rounded-full">
-      ddcdcs
+      
     </div>
   )
 }
@@ -17,13 +17,13 @@ const FeedSwitcher = () => {
   }
   let feed = "foryou"
   return (
-    <section className="fixed top-0 w-[46.71%]  border-x-[1px] border-b-[1px] border-[#2f3336] h-20 md:h-14   ">
-     <header className="md:hidden w-10 flex flex-row justify-between bg-yellow-300">
-     <userSwitchButton />
-      <div className=""><Image src = "/download.jpg" height={50} width={50}/></div>
-      <div>settings</div>
+    <section className="bg-black fixed top-0 w-full md:w-[46%] border-x-[1px] border-b-[1px] border-[#2f3336] h-20 md:h-14   ">
+     <header className="md:hidden w-full flex flex-row justify-between px-2 items-center bg-black">
+        <UserSwitchButton />
+        <div className=""><Image src = "/download.jpg" height={50} width={50}/></div>
+        <div>settings</div>
      </header>
-     <div className="flex flex-row bg-red-700 items-center w-full h-10 md:h-14">
+     <div className="flex flex-row items-center w-full h-10 md:h-14">
       <button
         onClick={() => {
           handleFeedChange("foryou");

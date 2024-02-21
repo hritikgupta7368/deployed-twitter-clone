@@ -20,7 +20,7 @@ const FollowRecommend_Card = () => {
         },
     ]
   return (
-    <div className='bg-cardsbg w-full h-full  rounded-xl flex flex-col justify-evenly'>
+    <div className='bg-cardsbg w-full h-full  rounded-xl md:flex flex-col justify-evenly hidden '>
        <h1 className="mt-3 pl-5 text-2xl font-bold ">Who to follow</h1>
        <section className="w-full">
         {testdata.map((link, index) => (

@@ -8,7 +8,7 @@ const Trending_Card = () => {
  
 
   return (
-    <div className="bg-cardsbg w-full  rounded-xl flex flex-col justify-evenly">
+    <div className="bg-cardsbg w-full  rounded-xl md:flex flex-col justify-evenly hidden ">
       <h1 className="mt-3 pl-5 text-2xl font-bold ">What's happening</h1>
       <section className="w-full pt-3">
         <ShowTrends />

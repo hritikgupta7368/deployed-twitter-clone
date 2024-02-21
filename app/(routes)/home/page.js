@@ -16,6 +16,9 @@ const Home = async () => {
 
   return (
     <div className="md:ml-[275px] w-full h-full  ">
+      <div className="bg-Button fixed bottom-24 md:hidden right-12 z-50 h-[60px] w-[60px] rounded-full">
+        
+      </div>
       <section className="overscroll-none w-full h-full flex flex-row ">
         <section className="w-full ">
           <FeedSwitcher />
@@ -27,12 +30,12 @@ const Home = async () => {
             </div>
           </section>
 
-          <section className="w-full h-[580px] overflow-y-auto">
+          <section className="w-full h-full overflow-y-auto">
             <PostsType />
           </section>
         </section>
 
-        <section className="w-full h-full ">
+        <section className="w-full h-full hidden md:contents">
           <div className="h-full pt-3 px-5  ">
             <div className="h-full w-full  flex flex-col items-center gap-4">
               <Search />
