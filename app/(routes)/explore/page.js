@@ -20,7 +20,7 @@ const CardSection = () => {
 const Explore = async() => {
 
   return (
-    <main className="md:pl-[275px] relative h-full w-full overflow-y-auto">
+    <main className=" md:pl-[275px] relative h-full w-full overflow-y-auto">
     <Navbar_side />
     <Header />
     <div className=" w-full h-full pt-[114px] md:pt-[54px]">

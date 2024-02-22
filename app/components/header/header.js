@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import Search from "../common/search";
 import { explore_items } from "@/app/constant/explore_items";
 import { useState } from "react";
+import { signOut } from "next-auth/react";
 const routes = [
   {
     label: "Profile",
@@ -145,9 +146,9 @@ const Navbar_side = () => {
   const { handleNavbarSide, showNavbar } = useModal();
 
   return (
-    <div onClick = {handleNavbarSide} className={`md:hidden${showNavbar ? "w-full h-full bg-slate-700/40 z-10 relative":""} `}>
-    <div className={`${showNavbar ? "translate-x-0 z-20 " : "-translate-x-[300px]" } h-full w-[70%] absolute bg-black duration-300 transition-all`}>
-      <div className="w-full py-3 px-4">
+    <div onClick = {handleNavbarSide} className={` md:hidden${showNavbar ? "w-full h-full bg-slate-700/40 z-10 relative":""} `}>
+    <div className={` ${showNavbar ? "  " : "-translate-x-[300px]" } z-20 h-full  absolute bg-black duration-300 transition-all`}>
+      <div className="w-full py-3 bg-red-900 px-4">
         <button onClick={handleNavbarSide}>
           <UserLogo logo={session.data?.user?.image} />
         </button>
@@ -158,10 +159,13 @@ const Navbar_side = () => {
           <p>{session.data?.user?.followers || 0} Followers</p>
         </div>
       </div>
-      <div className="w-full -2">
+      <div className="w-full">
         {routes.map((route, index) => {
+          if(index === 6){
+            return <div><button onClick={signOut}>{route.label}</button></div>
+          }
           return (
-            <div className="px-4 cursor-pointer h-[50.25px] w-[259px] max-h-[50.25px] rounded-3xl hover:bg-[#16181c] duration-200 max-w-[259px]">
+            <div className=" px-4 cursor-pointer h-[50.25px] w-[259px] max-h-[50.25px] rounded-3xl hover:bg-[#16181c] duration-200 max-w-[259px]">
               <Link href={route.href} className="w-full h-full ">
                 <div className="  w-[143px] max-w-[143px] h-[50.25px] flex flex-row items-center">
                   <div className="max-w-[26.25px] max-h-[26.25px]">
@@ -190,7 +194,7 @@ const Navbar_side = () => {
 
 const Header = () => {
   return (
-    <div className=" backdrop-blur-xl fixed w-full md:w-[46.8%] md:h-[54px] min-w-[40%] ">
+    <div className="backdrop-blur-xl fixed w-full md:w-[46.8%] md:h-[54px] min-w-[40%] ">
       <Header1 />
       <MainHeader />
     </div>
