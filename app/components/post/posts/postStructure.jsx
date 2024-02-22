@@ -20,7 +20,7 @@ const PostStructure = ({
 }) => {
  const link = `/${userId}`
   return (
-    <div className="z-20 w-full md:max-w-[598px] md:w-[598px] border-b-[1px] border-x-[1px] border-[#2f3336]">
+    <div className="z-0 w-full md:max-w-[598px] md:w-[598px] border-b-[1px] border-x-[1px] border-[#2f3336]">
       <div className="mx-[8px] pt-[12px] flex flex-row justify-between">
         <UserLogo logo = {userlogo} />
         

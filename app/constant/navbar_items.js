@@ -24,7 +24,7 @@ export const routes = [
   {
     label: "Grok",
     href: "/messages",
-    img: "navbarMenu/messages.svg",
+    img: "navbarMenu/grok.svg",
   },
   {
     label: "Lists",

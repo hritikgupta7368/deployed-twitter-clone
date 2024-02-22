@@ -11,7 +11,7 @@ import { routes } from "@/app/constant/navbar_items";
 
 const Navbar_test = () => {
   return (
-    <main className="fixed md:w-[275px] md:h-full">
+    <main className="fixed md:w-[275px] z-30 md:h-full">
       <div className="hidden md:contents md:max-w-[275px] md:w-[275px] md:h-full fixed">
         <div className=" md:relative md:h-full  mx-[8px]  md:flex-col md:justify-between  ">
           <div className=" max-h-[674px] h-[674px] max-w-[259px] ">
@@ -65,32 +65,37 @@ const Navbar_test = () => {
         </div>
       </div>
 
-      <div className="md:hidden fixed bottom-0 w-full bg-black h-16">
+      <div className="md:hidden  fixed bottom-0 w-full bg-black h-16">
         <div className="flex flex-row justify-between px-4 items-center h-full">
-          <Link href="/home">
+          
+         
             <div className="duration-200 hover:opacity-70 p-2 rounded-full">
+            <Link href="/home">
               <Image
                 src={"/navbarMenu/home.svg"}
                 height={26.25}
                 width={26.25}
                 alt="Picture of the author"
               />
+              </Link>
             </div>
-          </Link>
-          <Link href="/explore">
+          
+         
             <div className="duration-200 hover:opacity-70 p-2 rounded-full">
+            <Link href="/explore">
               <Image
                 src={"/navbarMenu/search.svg"}
                 height={26.25}
                 width={26.25}
                 alt="Picture of the author"
               />
+                </Link>
             </div>
-          </Link>
+        
           <Link href="/home">
             <div className="duration-200 hover:opacity-70 p-2 rounded-full">
               <Image
-                src={"/navbarMenu/home.svg"}
+                src={"/navbarMenu/grok.svg"}
                 height={26.25}
                 width={26.25}
                 alt="Picture of the author"

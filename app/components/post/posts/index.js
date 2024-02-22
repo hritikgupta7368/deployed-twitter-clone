@@ -131,9 +131,10 @@ const PostsType = ({
         // let media =   post.test
         let linkpost = `/${userinfo.userId}/status/${post.id}`;
         let linkuser = `/${userinfo.userId}`;
-        const media= []
-        const mediasrc = []
-        const res =[]
+        const media= ["1.jpg", "2.jpg", "3.jpg","1.mp4", "2.mp4", "3.mp4"]
+        const mediasrc = ["/testData/images/1.jpg", "/testData/images/2.jpg","/testData/images/3.jpg","/testData/videos/1.mp4","/testData/videos/2.mp4","/testData/videos/3.mp4"]
+
+        const res = getRandomItems(media, mediasrc,2)
         return (
           <PostStructure
           key={post.id}
