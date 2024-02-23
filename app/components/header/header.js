@@ -52,8 +52,8 @@ const Header1 = () => {
     const session = useSession();
     const { handleNavbarSide } = useModal();
   return (
-    <div className="md:hidden  flex flex-row justify-between items-center px-5 py-2 w-full">
-      <button onClick={handleNavbarSide}>
+    <div className="md:hidden flex flex-row justify-between items-center px-4  h-14 w-full">
+      {/* <button 
         <UserLogo logo={session.data?.user?.image} />
       </button>
       <div>
@@ -64,7 +64,14 @@ const Header1 = () => {
       </div>
       <button>
         <Image src="/common/settings.svg" height={25} width={25} quality={10} />
+      </button> */}
+    <div className="w-14 h-full flex flex-row items-center">
+      <button onClick={handleNavbarSide}>
+        <Image src = {session.data?.user?.image} height={32} width={32} className="rounded-full"/>
       </button>
+    </div>
+    <div className="w-full  h-full flex flex-row items-center"><Search/></div>
+    <div className="w-14 h-full flex flex-row justify-end items-center"> <Image src="/common/settings.svg" height={20} width={20} quality={10} /></div>
     </div>
   );
 };
@@ -115,7 +122,7 @@ const MainHeader = () => {
   if(path === "/explore"){
     const [selectedfeed , setSelectedFeed] = useState('For You')
     return (
-      <main className="w-full h-[53px]  flex flex-row overflow-x-auto "  style={{ scrollbarWidth: 'none' }}>
+      <main className="overflow-x-auto w-full h-[53px]  flex flex-row  "  style={{ scrollbarWidth: 'none' }}>
        {explore_items.map((items) => {
         return (
           <button onClick = {() => {setSelectedFeed(items.label)}} key={items.id} className=" link_button  text-[15px]">
@@ -146,47 +153,51 @@ const Navbar_side = () => {
   const { handleNavbarSide, showNavbar } = useModal();
 
   return (
-    <div onClick = {handleNavbarSide} className={` md:hidden${showNavbar ? "w-full h-full bg-slate-700/40 z-10 relative":""} `}>
-    <div className={` ${showNavbar ? "  " : "-translate-x-[300px]" } z-20 h-full  absolute bg-black duration-300 transition-all`}>
-      <div className="w-full py-3 bg-red-900 px-4">
-        <button onClick={handleNavbarSide}>
-          <UserLogo logo={session.data?.user?.image} />
-        </button>
-        <p>{session.data?.user?.name}</p>
-        <p>{session.data?.user?.userId}</p>
-        <div className="flex flex-row gap-4">
-          <p>{session.data?.user?.following || 0} Following</p>
-          <p>{session.data?.user?.followers || 0} Followers</p>
+    <div onClick = {handleNavbarSide} className={` fixed z-[12] md:hidden${showNavbar ? " h-full w-full " :""}  `}>
+    <div  className={` md:hidden${showNavbar ? "z-[15] w-full h-full bg-slate-700/40 relative":""} `}>
+    <div className={` ${showNavbar ? "  " : "-translate-x-[300px]" } z-20 h-full  absolute  duration-300 transition-all bg-black`}>
+
+      <div className="w-full p-4 h-[24%] ">
+        {/* line 1 */}
+        <div className="h-10  flex flex-row justify-between">
+          <Image src = {session.data?.user?.image} height={40} width={40} className="rounded-full"/>
+          <div className="h-full  w-8">+</div>
+        </div>
+
+          {/* line 2 */}
+        <div className=" mt-2">
+          <Link href={""}className="text-white font-bold">{session.data?.user?.name}</Link>
+          <p className="text-gray-500">{session.data?.user?.userId}</p>
+        </div>
+
+        {/* line 3 */}
+        <div className="mt-3 flex flex-row justify-start text-gray-500 text-sm">
+          <p className=""><span className="text-white font-bold">{session.data?.user?.following || 0}</span> Following</p>
+          <p className="ml-3"><span className="text-white font-bold">{session.data?.user?.followers || 0}</span> Followers</p>
         </div>
       </div>
-      <div className="w-full">
+
+      <div className="w-full ">
         {routes.map((route, index) => {
           if(index === 6){
-            return <div><button onClick={signOut}>{route.label}</button></div>
+            return <div className="w-full h-14 ">
+                    <button onClick={signOut} className="p-4 flex flex-row justify-start">
+                      <Image src={route.img} height={24} width={24} />
+                      <p className="h-6 ml-6 text-white font-bold text-xl">{route.label}</p>
+                    </button>
+                   </div>
           }
           return (
-            <div className=" px-4 cursor-pointer h-[50.25px] w-[259px] max-h-[50.25px] rounded-3xl hover:bg-[#16181c] duration-200 max-w-[259px]">
-              <Link href={route.href} className="w-full h-full ">
-                <div className="  w-[143px] max-w-[143px] h-[50.25px] flex flex-row items-center">
-                  <div className="max-w-[26.25px] max-h-[26.25px]">
-                    <Image
-                      src={route.img}
-                      height={26.25}
-                      width={26.25}
-                      alt="Picture of the author"
-                    />
-                  </div>
-                  <div className=" w-[116.75px] h-[24px] ">
-                    <span className=" font-light text-[15px] ml-[20px] ">
-                      {route.label}
-                    </span>
-                  </div>
-                </div>
-              </Link>
+            <div className="w-full h-14 ">
+               <Link href = "" className="p-4 flex flex-row justify-start">
+                  <Image src={route.img} height={24} width={24} />
+                  <p className="h-6 ml-6 text-white font-bold text-xl">{route.label}</p>
+               </Link>
             </div>
           );
         })}
       </div>
+    </div>
     </div>
     </div>
   );

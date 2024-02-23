@@ -11,7 +11,7 @@ html,body,:root{
 
 @layer components {
   .link_button {
-    @apply hover:bg-[#4c4d4f] duration-200 border-gray-600 text-[16px] text-gray-500 h-full w-full font-semibold  flex flex-row justify-center items-center;
+    @apply md:hover:bg-[#4c4d4f] duration-200 border-gray-600 text-[16px] text-gray-500 h-full w-full font-semibold  flex flex-row justify-center items-center;
   }
   .link_button_child {
     @apply flex flex-row items-center justify-center w-[70px];
@@ -23,13 +23,13 @@ html,body,:root{
     @apply absolute text-base text-gray-600 duration-150 transform translate-y-3 top-5 z-10 origin-[0] left-5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:text-Button peer-focus:-translate-y-4;
   }
   .input {
-    @apply w-[300px] my-2 p-4 pt-6 font-mono bg-black border-[1px] border-slate-400 rounded-lg outline-none transition disabled:opacity-70 disabled:cursor-not-allowed hover:border-Button duration-200;
+    @apply w-[300px] my-2 p-4 pt-6 font-mono bg-black border-[1px] border-slate-400 rounded-lg outline-none transition disabled:opacity-70 disabled:cursor-not-allowed md:hover:border-Button duration-200;
   }
   .submit {
-    @apply w-[300px] rounded-full bg-white text-black h-12 font-semibold m-2 hover:opacity-80 duration-200;
+    @apply w-[300px] rounded-full bg-white text-black h-12 font-semibold m-2 md:hover:opacity-80 duration-200;
   }
   .provider {
-    @apply hover:opacity-80 duration-200 my-2 text-white rounded-full w-[300px]  font-semibold h-[40px] border-[1px] border-slate-400;
+    @apply md:hover:opacity-80 duration-200 my-2 text-white rounded-full w-[300px]  font-semibold h-[40px] border-[1px] border-slate-400;
   }
   .heading {
     @apply text-white text-4xl font-bold;
@@ -50,16 +50,16 @@ html,body,:root{
     @apply w-[450px] h-[50px] bg-white text-black mt-6 rounded-full text-lg font-semibold hover:opacity-80 duration-200;
   }
   .link {
-    @apply hover:underline text-Button duration-200;
+    @apply md:hover:underline text-Button duration-200;
   }
   .body {
     @apply bg-black text-[#e7e9ea] h-[800px] border-slate-300 relative;
   }
   .blue_button {
-    @apply bg-Button hover:opacity-85 text-white font-bold text-base rounded-full duration-200
+    @apply bg-Button md:hover:opacity-85 text-white font-bold text-base rounded-full duration-200
   }
   .navbar_menu {
-    @apply h-12 pl-2 flex flex-row gap-6  items-center group-hover:bg-[#4c4d4f] duration-200 max-w-[90%] rounded-full
+    @apply h-12 pl-2 flex flex-row gap-6  items-center md:group-hover:bg-[#4c4d4f] duration-200 max-w-[90%] rounded-full
   }
   .post_options{
     @apply flex flex-row gap-2 items-center justify-center text-gray-400 font-semibold
