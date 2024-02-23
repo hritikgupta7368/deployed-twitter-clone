@@ -64,65 +64,33 @@ const Navbar_test = () => {
           <UserSessionCard />
         </div>
       </div>
-
-      <div className="md:hidden  fixed bottom-0 w-full bg-black h-16">
-        <div className="flex flex-row justify-between px-4 items-center h-full">
-          
-         
-            <div className="duration-200 hover:opacity-70 p-2 rounded-full">
-            <Link href="/home">
-              <Image
-                src={"/navbarMenu/home.svg"}
-                height={26.25}
-                width={26.25}
-                alt="Picture of the author"
-              />
-              </Link>
-            </div>
-          
-         
-            <div className="duration-200 hover:opacity-70 p-2 rounded-full">
-            <Link href="/explore">
-              <Image
-                src={"/navbarMenu/search.svg"}
-                height={26.25}
-                width={26.25}
-                alt="Picture of the author"
-              />
-                </Link>
-            </div>
-        
-          <Link href="/home">
-            <div className="duration-200 hover:opacity-70 p-2 rounded-full">
-              <Image
-                src={"/navbarMenu/grok.svg"}
-                height={26.25}
-                width={26.25}
-                alt="Picture of the author"
-              />
-            </div>
+              {/* bottom navabr */}
+      <div className="md:hidden flex flex-row justify-between items-center  fixed bottom-0 w-full bg-black border-t-[1px] border-[#2f3336] h-[53.5px]">
+          <Link href = {""} className="w-1/5 h-full border-b-[2px] border-black">
+              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
+                <Image src = "navbarMenu/home.svg" height={26.5} width={26.5} />
+              </div>
           </Link>
-          <Link href="/notifications">
-            <div className="duration-200 hover:opacity-70 p-2 rounded-full">
-              <Image
-                src={"/navbarMenu/notifications.svg"}
-                height={26.25}
-                width={26.25}
-                alt="Picture of the author"
-              />
-            </div>
+          <Link href = {""} className="w-1/5 h-full border-b-[2px] border-black">
+              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
+                <Image src = "navbarMenu/search.svg" height={26.5} width={26.5} />
+              </div>
           </Link>
-          <Link href="/messages">
-            <div className="duration-200 hover:opacity-70 p-2 rounded-full">
-              <Image
-                src={"/navbarMenu/messages.svg"}
-                height={26.25}
-                width={26.25}
-                alt="Picture of the author"
-              />
-            </div>
+          <Link href = {""} className="w-1/5 h-full border-b-[2px] border-black">
+              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
+                <Image src = "navbarMenu/grok.svg" height={26.5} width={26.5} />
+              </div>
           </Link>
-        </div>
+          <Link href = {""} className="w-1/5 h-full border-b-[2px] border-black">
+              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
+                <Image src = "navbarMenu/notifications.svg" height={26.5} width={26.5} />
+              </div>
+          </Link>
+          <Link href = {""} className="w-1/5 h-full border-b-[2px] border-black">
+              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
+                <Image src = "navbarMenu/messages.svg" height={26.5} width={26.5} />
+              </div>
+          </Link>
       </div>
     </main>
   );

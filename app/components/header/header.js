@@ -115,12 +115,12 @@ const MainHeader = () => {
   if(path === "/explore"){
     const [selectedfeed , setSelectedFeed] = useState('For You')
     return (
-      <main className="w-full h-[54px]  flex flex-row overflow-x-auto">
+      <main className="w-full h-[53px]  flex flex-row overflow-x-auto "  style={{ scrollbarWidth: 'none' }}>
        {explore_items.map((items) => {
         return (
           <button onClick = {() => {setSelectedFeed(items.label)}} key={items.id} className=" link_button  text-[15px]">
             <h1  key={items.id}
-              className={`link_button_child w-[100px] p-2 ${
+              className={`link_button_child min-w-[100px] p-2 ${
                 selectedfeed === items.label
                   ? "text-white border-b-[5px] h-full border-Button rounded-sm "
                   : ""
@@ -194,7 +194,7 @@ const Navbar_side = () => {
 
 const Header = () => {
   return (
-    <div className="backdrop-blur-xl fixed w-full md:w-[46.8%] md:h-[54px] min-w-[40%] ">
+    <div className="z-10 backdrop-blur-xl fixed w-full md:w-[46.8%] md:h-[54px] min-w-[40%] ">
       <Header1 />
       <MainHeader />
     </div>
