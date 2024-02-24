@@ -10,6 +10,9 @@ import { Trending_Card } from "@/app/components/cards/happening_card";
 import FollowRecommend_Card from "@/app/components/cards/follow_card";
 import { Edit_profile } from "@/app/components/navbar/buttons_navbar";
 import Image from "next/image";
+import { Header } from "@/app/components/header/header";
+
+
 
 
 const Profile = async ({ params }) => {
@@ -42,9 +45,10 @@ const Profile = async ({ params }) => {
     const posts = user?.posts;
 
     return (
-      <main className="w-full h-full pl-[275px]">
-        <div className=" h-full w-full overflow-y-auto">
-          {/* search bar */}
+      <main className="w-full h-full  md:pl-[275px]">
+        {/* <div className=" h-full w-full overflow-y-auto">
+
+         
           <div className="z-20 fixed right-0 w-[408px] h-[53px] py-1 px-[30px] top-0 bg-black">
             <Search />
           </div>
@@ -84,10 +88,41 @@ const Profile = async ({ params }) => {
               <div className="mt-3"><Trending_Card /></div>
             </div>
           </main>
-        </div>
+        </div> */}
+         <Header />
+        <Body />
+        <div className=" w-full h-full  md:pt-[54px]">
+        <Homeposts />
+      </div>
       </main>
     );
   }
 
+  const Body = () => {
+    return (
+      <div className="pt-[53px] w-full ">
+
+        {/* section 1 */}
+        <section className="w-full min-h-[312px]">
+          <div className="min-h-[119px] bg-slate-700">banner</div>
+          <div className="h-full w-full mb-4 px-4 pt-3">
+            <div className="min-h-12">edit profile</div>
+            <div className="mt-1 mb-3">name</div>
+            <div className="mb-3">joined</div>
+            <div className="h-5">followers</div>
+          </div>
+
+        </section>
+
+        {/* navigation bar */}
+        <section className="w-full h-[54px]">
+        <div className="flex flex-row"> {Button_function(links)}</div>
+        </section>
+
+
+
+      </div>
+    )
+  }
 
 export default Profile;
