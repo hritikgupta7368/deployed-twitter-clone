@@ -15,7 +15,7 @@ export default async function RootLayout({ children }) {
         <SessionProvider session = {session}>
           <ContextProvider>
           <Modals />
-          <div className="flex flex-row h-full ">
+          <div className="flex flex-row h-full  ">
            <Navbar />
             {children}
           </div>

@@ -13,7 +13,7 @@ function Button_Post() {
   return (
     <button
       onClick={() => handleModal("createPost")}
-      className="mt-2 blue_button w-full text-xl rounded-full h-full"
+      className="fixed z-10 bottom-20 right-7 w-20 h-10 md:mt-2 blue_button md:w-full text-xl rounded-full md:h-full"
     >
       Post
     </button>
@@ -156,7 +156,7 @@ function Edit_profile(){
   const { isModalOpen , handleModal ,modalType} = useModal();
   return(
   
-    <button  onClick={() => {handleModal('editprofile')}} className="absolute bottom-44 right-4 font-bold hover:opacity-65 duration-200 rounded-full border-[1px] px-4 py-1 border-gray-600">Edit profile</button>
+    <button  onClick={() => {handleModal('editprofile')}} className="absolute right-4 md:bottom-44 md:right-4 font-bold hover:opacity-65 duration-200 rounded-full border-[1px] px-4 py-1 text-white border-gray-600">Edit profile</button>
    
   )
 }

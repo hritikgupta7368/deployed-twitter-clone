@@ -13,7 +13,7 @@ export default function RootLayout() {
   
   return (
     <html lang="en">
-      <body className="bg-black relative sm:max-h-[865px] sm:max-w-[375px]">
+      {/* <body className="bg-black relative sm:max-h-[865px] sm:max-w-[375px]">
       <SessionProvider>
         {!registermodalVisible && loginmodalVisible && (
           <div className=" absolute w-full h-full bg-slate-700/55">
@@ -54,6 +54,17 @@ export default function RootLayout() {
           </div>
         </section>
         </SessionProvider> 
+      </body> */}
+      <body className="w-full h-full relative">
+        <main className="w-full h-full overflow-y-auto">
+            <Register />
+            <footer>footer</footer>
+        </main>
+        {!registermodalVisible && loginmodalVisible && (
+          <div className="absolute w-full h-full bg-slate-700/55">
+            hrelldcjkbdsb
+          </div>
+        )}
       </body>
     </html>
   );

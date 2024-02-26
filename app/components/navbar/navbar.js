@@ -13,6 +13,9 @@ const Navbar = () => {
   return (
     <main className="fixed md:w-[275px] bg-black z-10 md:h-full">
       
+
+     
+        <Button_Post />
       {/* medium screen navbar */}
       <div className="hidden md:contents md:max-w-[275px] md:w-[275px] md:h-full fixed">
         <div className=" md:relative md:h-full  mx-[8px]  md:flex-col md:justify-between  ">

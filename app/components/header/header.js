@@ -4,7 +4,7 @@ import Image from "next/image";
 import UserLogo from "../common/userLogo";
 import { useModal } from "@/app/providers/contextprovider";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname } from 'next/navigation'
 import Search from "../common/search";
 import { explore_items } from "@/app/constant/explore_items";
 import { useState } from "react";
@@ -50,11 +50,31 @@ const routes = [
 ];
 
 const Header1 = () => {
-  const path = usePathname();
+  const path = usePathname()
   const session = useSession();
   const { handleNavbarSide } = useModal();
+
   if(path === `/${session.data?.user?.userId}`){
     return null
+  }
+  if (path === "/home"){
+    return <div className="md:hidden flex flex-row justify-between items-center px-4  h-14 w-full">
+      <div className="w-14 h-full flex flex-row items-center">
+        <button onClick={handleNavbarSide}>
+          <Image
+            src={session.data?.user?.image}
+            height={32}
+            width={32}
+            className="rounded-full"
+          />
+        </button>
+      </div>
+      <div className="h-full w-9 flex flex-row items-center "><Image src = "/download.jpg" height={20} width={22} quality={100} className="w-full"/></div>
+      <div className="w-14 h-full flex flex-row justify-end items-center">
+        {" "}
+        <Image src="/common/settings.svg" height={20} width={20} quality={10} />
+      </div>
+    </div>
   }
   return (
     <div className="md:hidden flex flex-row justify-between items-center px-4  h-14 w-full">
@@ -69,6 +89,7 @@ const Header1 = () => {
           />
         </button>
       </div>
+
       <div className="w-full  h-full flex flex-row items-center">
         <Search />
       </div>
@@ -76,6 +97,7 @@ const Header1 = () => {
         {" "}
         <Image src="/common/settings.svg" height={20} width={20} quality={10} />
       </div>
+     
     </div>
   );
 };
@@ -158,7 +180,14 @@ const MainHeader = () => {
     );
   }
   if(path === `/${session.data?.user?.userId}`){
-    return <div className="w-full h-[53px] bg-red-400"> header</div>
+    const router = useRouter()
+    function handleClick(){
+      router.back()
+    }
+    return <div className="w-full h-[53px]  flex flex-row">
+      <div onClick = {handleClick} className="h-full flex flex-row items-center px-3 cursor-default"><Image src = "/common/return.svg" height={100} width={100} className="w-6 h-6"/></div>
+      <div className="h-full flex flex-row items-center px-3 font-bold">{session.data?.user?.name}</div>
+    </div>
   }
   else return null;
 };
@@ -173,7 +202,7 @@ const Navbar_side = () => {
   const { handleNavbarSide, showNavbar } = useModal();
 
   function handleButtonClick(){
-    handleNavbarSide
+    handleNavbarSide()
     router.push(session.data?.user?.userId)
   }
 
@@ -254,8 +283,6 @@ const Navbar_side = () => {
    
   );
 };
-
-
 
 
 

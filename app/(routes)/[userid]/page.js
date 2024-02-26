@@ -46,50 +46,9 @@ const Profile = async ({ params }) => {
 
     return (
       <main className="w-full h-full  md:pl-[275px]">
-        {/* <div className=" h-full w-full overflow-y-auto">
-
-         
-          <div className="z-20 fixed right-0 w-[408px] h-[53px] py-1 px-[30px] top-0 bg-black">
-            <Search />
-          </div>
-
-          <div className="px-3 flex flex-row backdrop-blur-lg z-10 fixed h-[53px] w-[598px] border-x-[1px] border-b-[1px] border-[#2f3336] ">
-              <div className="w-[56px] my-auto"><Image src = "common/return.svg" height={20} width={20}/></div>
-              <div className="w-[510px] font-extrabold my-auto">{user?.name}</div>
-          </div>
-
-          <main className="mt-[53px] flex flex-row ">
-
-            <div className="w-[598px] h-full">
-              <div className="relative w-[598px] h-[423px] border-x-[1px] border-b-[1px] border-[#2f3336]">
-
-                <div className="h-[200px] w-full bg-gray-800"><div className="absolute top-32 left-5 w-32 h-32 rounded-full  outline outline-black"><Image src = {user?.image} height = {128} width = {128} alt="Picture of the author" className="max-w-32 max-h-32 rounded-full" /></div></div>
-                  <Edit_profile />
-                <main className="pt-16 pl-5">
-                 <div>
-                    <p className=" text-2xl font-bold">{user?.name}</p>
-                    <p className=" text-gray-400/70 font-medium">{user?.userId}</p>
-                 </div>
-                 <p className="text-gray-400/70">joined {user?.birthDate}</p>
-                 <div className="flex flex-row gap-3 text-gray-400/70 ">
-                 <p className="hover:underline"><span className="text-white font-medium">{user?.following}</span> Following </p>
-                  <p className="hover:underline"><span className="text-white font-medium">{user?.followers}</span> Followers </p>
-                 </div>
-                </main>
-                <div className="flex flex-row"> {Button_function(links)}</div>
-                <Homeposts />
-              </div>
-             
-            </div>
-
-
-            <div className="sticky top-[53px] w-[408px] h-[800px] px-[30px]" >
-              <div className="mt-3"><FollowRecommend_Card /></div>
-              <div className="mt-3"><Trending_Card /></div>
-            </div>
-          </main>
-        </div> */}
-         <Header />
+        
+      
+         <div className="bg-red-300"><Header /></div>
         <Body />
         <div className=" w-full h-full  md:pt-[54px]">
         <Homeposts />
@@ -98,24 +57,50 @@ const Profile = async ({ params }) => {
     );
   }
 
-  const Body = () => {
+  const Body = async() => {
+    const session = await getServerSession(authOptions);
     return (
       <div className="pt-[53px] w-full ">
 
         {/* section 1 */}
-        <section className="w-full min-h-[312px]">
-          <div className="min-h-[119px] bg-slate-700">banner</div>
-          <div className="h-full w-full mb-4 px-4 pt-3">
-            <div className="min-h-12">edit profile</div>
-            <div className="mt-1 mb-3">name</div>
-            <div className="mb-3">joined</div>
-            <div className="h-5">followers</div>
+        <section className="relative w-full min-h-[312px]">
+          {/* banner */}
+          <div className="min-h-[119px] bg-[#333639]"></div>
+
+          {/* section 1.1 */}
+          <div className="h-full w-full mb-4 px-4 pt-3 text-gray-500 text-sm">
+            <div className="min-h-12"><Edit_profile /></div>
+            <div className="mt-1 mb-3">
+              <p className="text-white text-xl font-bold">{session?.user?.name}</p>
+              <p className="text-base">{session?.user?.userId}</p>
+            </div>
+            <div className="mb-3 text-base">
+              joined date
+            </div>
+            <div className="h-5 flex flex-row justify-start ">
+            <p className="">
+                <span className="text-white font-bold">
+                  {session?.user?.following || 0}
+                </span>{" "}
+                Following
+              </p>
+              <p className="ml-3">
+                <span className="text-white font-bold">
+                {session?.user?.followers || 0}
+                </span>{" "}
+                Followers
+              </p>
+            </div>
           </div>
 
+        {/* userlogo */}
+        <div>
+          <Image src = {session?.user?.image} height={90} width={90} className="rounded-full absolute top-20 left-4" />
+        </div>
         </section>
 
         {/* navigation bar */}
-        <section className="w-full h-[54px]">
+        <section className="w-full h-[54px] border-b">
         <div className="flex flex-row"> {Button_function(links)}</div>
         </section>
 

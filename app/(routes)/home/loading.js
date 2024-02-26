@@ -3,10 +3,10 @@ export default function Loading() {
  
   return (
     <div className="h-full w-full relative">
-    <div  role="status" className="absolute  top-[300px] right-[650px]">
+    <div  role="status" className="absolute top-[134px] left-[150px] md:top-[300px] md:right-[650px]">
       <svg
         aria-hidden="true"
-        class=" w-9 h-9 text-gray-700 font-bold animate-spin dark:text-gray-600 fill-[#1d9bf0]"
+        class=" w-9 h-9 text-gray-700 font-bold animate-spin dark:text-blue-900 fill-[#1d9bf0]"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
