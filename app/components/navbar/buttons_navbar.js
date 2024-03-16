@@ -13,7 +13,7 @@ function Button_Post() {
   return (
     <button
       onClick={() => handleModal("createPost")}
-      className="fixed z-10 bottom-20 right-7 w-20 h-10 md:mt-2 blue_button md:w-full text-xl rounded-full md:h-full"
+      className="fixed z-10 bottom-20 right-7 w-20 h-10 md:mt-2 blue_button md:w-full text-xl rounded-full md:h-10 md:w-10"
     >
       Post
     </button>

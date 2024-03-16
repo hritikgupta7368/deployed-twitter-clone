@@ -1,106 +1,82 @@
 "use client";
-import { signIn,useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const LoginModal = ({ setModalVisible, setregisterModalVisible }) => {
   const router = useRouter();
-  const session = useSession()
-  const [error , setError] = useState();
+  const session = useSession();
+  const [step, setStep] = useState(1);
+  const [error, setError] = useState();
   const handleChange = () => {
     setregisterModalVisible(true);
     setModalVisible(false);
   };
 
-  useEffect(()=>{
-    if(session?.status === 'authenticated'){
-      router.replace("/home")
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      router.replace("/home");
     }
-  },[session,router])
+  }, [session, router]);
 
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     let userId = formData.get("userId");
     let password = formData.get("password");
-    e.target.reset()
+    e.target.reset();
     const response = await signIn("credentials", {
       userId: userId,
       password: password,
       redirect: false,
     });
-    
+
     if (response?.error) {
       setError(response.error);
-      return
+      return;
     }
-    if(response.ok){
+    if (response.ok) {
       router.replace("/home");
     }
-   
+    async function handleSubmit1() {}
   }
   return (
-    <div className=" w-[600px] h-[670px]  bg-black rounded-xl ">
-      {error && <p className="text-red">{error}</p>}
-      <div className="pt-3  ml-3 flex flex-row justify-between w-[50%] ">
-        <button
-          className="font-mono text-xl"
-          onClick={() => setModalVisible(false)}
-        >
-          X
+    <main className="bg-black h-full w-full md:w-[600px] md:h-[648px] md:rounded-xl md:fixed md:right-32">
+      {/* header */}
+      <header className="h-[53px] flex flex-row  px-4 bg-black bg-green-200 ">
+        <div className="w-[145px] md:w-[270px] flex flex-row justify-start  ">
+        <button className="" onClick={() => setModalVisible(false)}>
+          <Image src="/cross.svg" height={20} width={20} />
         </button>
-        <Image src="/download.jpg" height={40} width={40} alt="Picture of the author" />
-      </div>
-      <div className=" ml-[150px] w-[52%]   mt-5 ">
-        <h1 className="text-4xl font-semibold mb-7">Sign in to X </h1>
-
-        <div className="flex flex-col">
-          <button className="provider">Sign in with Google</button>
-          <button className="provider">Sign in with Github</button>
-          <div className="border-t-[1px] border-gray-600  text-center mt-3 mx-3">
-            Or
-          </div>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="relative m-2">
-            <input
-              name="userId"
-              type="text"
-              id="username"
-              className="peer input"
-              required
-            />
-            <label className="label" >
-              UserName
-            </label>
-          </div>
-          <div className="relative m-2">
-            <input
-              name="password"
-              type="password"
-              id="password"
-              className="peer input"
-              required
-            />
-            <label className="label" >
-              Password
-            </label>
-          </div>
-
-          <button className="submit">Submit</button>
-        </form>
-        <div className="text-center mt-3">
-          Don't have an account?{" "}
-          <button
-            onClick={handleChange}
-            className="inline hover:underline text-blue-400"
-          >
-            Sign-Up
-          </button>
+       
+        <div className="bg-yellow-300">
+          <Image
+            src="/download.svg"
+            height={100}
+            width={100}
+            className="h-full w-10"
+          />
         </div>
-      </div>
-    </div>
+      </header>
+
+      {/* formbody */}
+      {step === 1 && (
+        <div className="h-full w-full bg-black md:rounded-t-xl">
+          <form>
+            <div className=" bg-red-300">
+              <div>
+                <p className=" h-[72px] py-5 text-3xl font-bold ">
+                  signin to X
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      )}
+      {step === 2 && <div>step 2 enter password</div>}
+    </main>
   );
 };
 

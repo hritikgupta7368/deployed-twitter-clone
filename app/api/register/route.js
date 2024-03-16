@@ -53,43 +53,43 @@ export async function POST(request) {
 
     if ("step" in formData && formData.step === "1") {
       const { email } = formData;
+     
       if (await userExistsByEmail(email)) {
         return NextResponse.json(
-          { error: "User already exists" },
+          { error: "email already exists" },
           { status: 400 }
         );
       } else {
-        return NextResponse.json({ message: "success proceed to step 2" });
+        return NextResponse.json({ message: "success unique email" });
       }
     }
-    if ("step" in formData && formData.step === "2") {
-      const { userId, name, password, email } = formData;
 
-      if (await userExistsByuserId(userId)) {
-        console.log("checking userid");
-        return NextResponse.json(
-          { error: "use different userId" },
-          { status: 400 }
-        );
-      } else {
-        const hashedpassword = await hash(password, 10);
+    if ("step" in formData && formData.step === "final") {
+      const { NAME,EMAIL,DOB,PASSWORD ,USERID} = formData;
+
+      if (await userExistsByuserId(USERID)) {
+        return NextResponse.json({ error: "use different userId" });
+      } 
+      else {
+        const hashedpassword = await hash(PASSWORD, 10);
         const newUser = await createNewUser(
-          userId,
-          name,
+          USERID,
+          NAME,
           hashedpassword,
-          email
+          EMAIL
         );
        
         if (newUser || true) {
           return NextResponse.json({
             message: "user created successfully",
-            login: true,
+            
           });
         }
       }
-      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+     
     }
   } catch (error) {
-    return NextResponse.json({ error: error.message });
+    console.log(error.message);
+    return NextResponse.json({ error: " server error" });
   }
 }

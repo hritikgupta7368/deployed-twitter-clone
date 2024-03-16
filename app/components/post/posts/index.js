@@ -1,159 +1,106 @@
-"use client"
-
+"use client";
+import Loading from "@/app/(routes)/[userid]/loading";
 import PostStructure from "./postStructure";
-import { useEffect ,useState } from "react";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { VariableSizeList } from "react-window";
 
+const PostsType = ({ type }) => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState();
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
 
-const PostsType = ({
-  type,
-  
-
-}) => {
-    const [posts, setPosts] = useState([]);
-    
-    function getRandomItems(arr1, arr2, size) {
-     
-      function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-      }
-    
-     
-      shuffleArray(arr1);
-      shuffleArray(arr2);
-    
-      
-      const randomArr1 = arr1.slice(0, size);
-      const randomArr2 = arr2.slice(0, size);
-    
-      return [randomArr1, randomArr2];
-    }
-
-    function queryGenerator(type){
-      try{
-        if(!type){
-          throw new Error("type must be defined");
-        }
-        let query = {}
-        // switch(type){
-        //   case "For You" :
-        //     {
-        //       return (
-        //         // random posts
-        //       )
-        //     }
-        //     case "Following" :
-        //     {
-        //       return (
-        //       //  posts from followers
-        //       )
-        //     }
-        //     case "Trending" :
-        //     {
-        //       return (
-        //         // hashtag table with top highest posts
-        //       )
-        //     }
-            
-        //     case "Sports" :
-        //     {
-        //       return (
-        //         // posts which have a sports tag mentioned
-        //       )
-        //     }
-        //     case "Entertainment" :
-        //       {
-        //         return (
-        //           // posts which have a entertainment tag mentioned
-        //         )
-        //       }
-             
-        //   default : {
-
-        //   }
-      }
-    
-      catch(e){
-        console.log("query generation failed")
-        return
-    }
-  }
-
+  const fetchNewPosts = async () => {
+    if (loading || !hasMore) return;
+    setLoading(true);
+    try {
    
-
-    const fetchPosts = async() => {
-        try {
-            const response = await fetch('/api/getposts')
-            if (!response.ok) {
-                throw new Error('Failed to fetch posts');
-              }
-              const data = await response.json();
-              setPosts(data.posts);
-        }
-        catch(err){
-            console.error(err)
-        }
-
+      const response = await fetch(`/api/getposts?page=${page}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts");
+      }
+      const data = await response.json();
+      if (data.posts.length === 0) {
+        setHasMore(false);
+      }
+      setPosts((prevPosts) => [...prevPosts, ...data.posts]);
+      setPage((prev) => prev + 1);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
     }
+  };
+  useEffect( () =>{
+    async function fetchStartingPosts(){
+      try{
+        const response = await fetch(`/api/getposts?page=${page}`);
+        const data = await response.json();
+        setPosts(data.posts)
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+    setTimeout(() => {
+      fetchStartingPosts()
+    },2000)
+   
+   
+  },[])
 
-    const fetchMediaUrls = async (post) => {
-        const mediaUrls = await Promise.all(post.media.map(async (fileName) => {
-          const response = await fetch(`/api/media-url?fileName=${fileName}`);
-          if (!response.ok) {
-            throw new Error(`Failed to fetch URL for ${fileName}`);
-          }
-          return response.json();
-        }));
-        return mediaUrls;
-      };
+  const getItemSize = (index) => {
+    // Replace this with your own logic to calculate post height based on content
+    return 400; // Placeholder value for demonstration
+  };
 
-
-      const renderPostMedia = async (post) => {
-        const mediaUrls = await fetchMediaUrls(post);
-        // Update the post object with media URLs
-        const updatedPost = { ...post, mediaUrls };
-        // Find index of the post in the array and update it
-        const updatedPosts = posts.map((p) => (p.id === updatedPost.id ? updatedPost : p));
-        setPosts(updatedPosts);
-      };
-    
-
-    useEffect(() => {
-        fetchPosts();
-      }, []);
+  const Post = ({ index, style }) => {
+    const post = posts[index];
+    return (
+      <div style={style}>
+        <PostStructure
+          key={index}
+          comments={post.commentsCount}
+          reposts={post.repostsCount}
+          likes={post.likesCount}
+          views="4.6M"
+          date={post.createdAt}
+          username={post.user.name}
+          userId={post.user.userId}
+          content={post.content}
+          userlogo={post.user.image}
+          index={index}
+          media={["1.jpg", "2.jpg", "3.jpg"]}
+          mediaSrc={post.images}
+        />
+      </div>
+    );
+  };
 
   return (
-    posts.map((post, index) => {
+    <InfiniteScroll
+      dataLength={posts.length || 0}
+      next={fetchNewPosts}
+      hasMore={hasMore}
+      loader={<Loading />}
+      endMessage={
+        <p style={{ textAlign: "center" }}>
+          <b>Yay! You have seen it all</b>
+        </p>
+      }
+    >
+       <VariableSizeList
+        height={500} // Total height of the visible area for the list
+        itemCount={posts.length} // Total number of items in the list
+        itemSize={getItemSize} // Function to determine the height of each item
+        width={"100%"} // Total width of the visible area for the list
+      >
+        {Post}
+      </VariableSizeList>
+      
+    </InfiniteScroll>
+  );
+};
 
-        let userinfo = post.user
-        // let media =   post.test
-        let linkpost = `/${userinfo.userId}/status/${post.id}`;
-        let linkuser = `/${userinfo.userId}`;
-        const media= ["1.jpg", "2.jpg", "3.jpg","1.mp4", "2.mp4", "3.mp4"]
-        const mediasrc = ["/testData/images/1.jpg", "/testData/images/2.jpg","/testData/images/3.jpg","/testData/videos/1.mp4","/testData/videos/2.mp4","/testData/videos/3.mp4"]
-
-        const res = getRandomItems(media, mediasrc,2)
-        return (
-          <PostStructure
-          key={post.id}
-          comments = {post.commentsCount}
-          reposts = {post.repostsCount}
-          likes = {post.likesCount}
-          views = {"4.6M"}
-          date = {post.createdAt}
-          username = {userinfo.name}
-          userId = {userinfo.userId}
-          content={post.content}
-          userlogo={userinfo.image}
-          index = {index}
-          media = {res[0]}
-          mediaSrc = {res[1]}
-          />
-        );
-      })
-  )
-}
-
-export default PostsType
+export default PostsType;

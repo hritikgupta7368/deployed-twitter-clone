@@ -3,9 +3,16 @@ import { NextResponse } from "next/server";
 
 
 //workflow -> home -> req 
-export async function GET(request){
+export async function GET(req){
     try{
+     let url = new URL(req.url)
+     let searchParams = new URLSearchParams(url.searchParams)
+     let page = parseInt(searchParams.get('page'))
+    
+        const pageSize = 10;
         const posts = await prisma.post.findMany({
+            skip: (page - 1) * pageSize,
+            take: pageSize,
             orderBy: {
               createdAt: 'desc',
             },
@@ -14,7 +21,12 @@ export async function GET(request){
             }
           });
           if(posts.length>0){
-            return NextResponse.json({  posts : posts });
+           
+              return NextResponse.json({ posts });
+        
+          }
+          if(posts.length <=0){
+          return NextResponse.json({end : "the end"} );
           }
     
     }

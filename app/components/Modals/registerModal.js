@@ -1,210 +1,394 @@
-
-import { useState } from "react";
+"use client"
+import Useridrecommend from "@/app/services/algo/useridrecommend";
+import { Input1,SubmitForm,DateInput} from "@/app/services/input/input";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
-const RegisterModal = ({ setregisterModalVisible, setModalVisible }) => {
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
-  const [step, setStep] = useState(1);
-  const [loading ,setLoading] = useState(false);
-  const [localformData, setLocalFormData] = useState({
-    email: '',
-    name: '',
-    password: '',
-  });
 
 
-  const handleChange = () => {
-    setModalVisible(true);
-    setregisterModalVisible(false);
-  };
-  try {
-    const handleSubmit1 = async (e) => {
-      try {
-        setLoading(true)
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        let name =  formData.get("name")
-        let email= formData.get("email")
-        let password = formData.get("password")
-        const response = await fetch(`/api/register`, {
-          method: "POST",
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            password: password,
-            step: "1"
-            
-          }),
-        });
-        const responseData = await response.json();
+function Step1({ setStep, setFormData , finalData }) {
+  const [secondaryCredentials, setsecondaryCredentials] = useState("email");
+  const [error , setError] = useState({message : "" , state : false})
 
-        if (!response.ok) {
-          setLoading(false)
-          throw new Error(
-            responseData.error || "server error kindly try again"
-          );
-        }
-        if (responseData.message === "success proceed to step 2") {
-          setSuccess("next step");
-          
-          setTimeout(() => {
-            setStep(2)
-            setLocalFormData({...formData,email,name,password});
-            setLoading(false)
-            setSuccess(null)
-          }, 3000);
-          
-        }
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    const handleSubmit2 = async(e) => {
-      try {
-        setLoading(true)
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        let userId = formData.get('userId');
-
-        const response = await fetch(`/api/register`, {
-          method: "POST",
-          body: JSON.stringify({
-            name: localformData.name,
-            email: localformData.email,
-            password: localformData.password,
-            userId :userId,
-            step: "2"
-            
-          }),
-        });
-        const responseData = await response.json();
-        if (!response.ok) {
-          throw new Error(
-            responseData.error || "server error kindly try again"
-          );
-        }
-        if (responseData.message === "user created successfully"){
-          setTimeout(() => {
-           
-           handleChange()
-            setLoading(false)
-            setSuccess(null)
-          }, 3000);
-        }
-      }
-      catch(error){
-        setError(error.message);
-      }
+  function handleSecondaryInputChange() {
+    setsecondaryCredentials(
+      secondaryCredentials === "email" ? "phone" : "email"
+    );
+  }
+  const Form = ({secondaryCredentials}) => {
+    const validateName = (input) => {
+      const regex = /.{1,}/;
+      return regex.test(input);
+    }
+    function validateEmail(input) {
+      const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{1,7}$/;
+      return regex.test(input);
+    }
+    function Switch(){
+      return (
+        <div className="w-full relative mb-8">
+        <button type="button" onClick={handleSecondaryInputChange} className=" absolute right-2 font-medium text-sm text-Button ">
+              {secondaryCredentials === "email"? "Use phone instead" : "Use email instead"}
+        </button>
+        </div>
+      )
+    }
+    function Date(){
+      return (
+        <div className="h-[170px]">
+        <p>Date of Birth</p>
+        <div
+          style={{ fontSize: 15, lineHeight: 1.2 }}
+          className="text-gray-500"
+        >
+          This will not be shown publicly. Confirm your own age, even if
+          this account is for a business, a pet, or something else.
+        </div>
+        <DateInput
+          type="date"
+          label="Date of Birth"
+          placeholder="dd/mm/yyyy"
+          name="date"
+        />
+      </div>
+      )
     }
     return (
-      <main className="relative w-[600px] h-[740px]  bg-black rounded-xl">
-        <div className="flex flex-col items-center mt-2 ">
-          <Image src="/download.jpg" height={60} width={60} alt="Picture of the author" />
-          <h1 className="text-3xl font-bold ">Create a new account</h1>
-          {error && <p className="text-red-500 font-mono text-sm">{error}</p>}
-          {success && <p className=" font-mono">{success}</p>}
-         
-          {loading && <p>Loading ....</p>}
-          {step === 1 && <form onSubmit={handleSubmit1}>
-            <div className="relative m-2">
-              <input
-                name="name"
-                type="text"
-                id="name"
-                required
-                className="peer input"
-              />
-              <label className="label" >
-                Name
-              </label>
-            </div>
-            <div className="relative m-2">
-              <input
-                name="email"
-                type="text"
-                id="email"
-                required
-                className="peer input"
-              />
-              <label className="label" >
-                Email
-              </label>
-            </div>
-            <div className="relative m-2">
-              <input
-                name="password"
-                type="password"
-                id="password"
-                className="peer input"
-                required
-              />
-              <label className="label" >
-                Password
-              </label>
-            </div>
-            
-            <button
-              type="submit"
-              className="submit mt-2 ml-[75px] font-semibold  w-40 h-10"
-            >
-              Next
-            </button>
-          </form>}
+      <>
+       <Input1 type="text" label="Name" name="name" validation = {validateName} error = {error}/>
+       {secondaryCredentials === "email" ? <Input1 type="email" label="Email" name="email" validation = {validateEmail} error = {error} setError = {setError}/> :<Input1 type="text" label="Phone" name="phone" validation = {validateEmail} error = {error}/>}
+        <Switch />
+        <Date />
+      </>
+    )
+  }
 
-          {step === 2 && (
-          <form onSubmit={handleSubmit2}>
-            <div className="relative m-2">
-              <input
-                name="userId"
-                type="text"
-                id="userId"
-                className="peer input"
-                required
-              />
-              <label className="label" for="userId">
-                choose userId
-              </label>
-            </div>
-            <button
-              type="submit"
-              className="submit mt-2 ml-[75px] font-semibold w-40 h-10"
-            >
-              Create Account
-            </button>
-          </form>
-        )}
+  const handleSubmit1 = async (e) => {
+    try {
+      e.preventDefault();
 
+      const formData = new FormData(e.currentTarget);
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const dob = formData.get("date");
 
+      const response = await fetch(`/api/register`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: email,
+          step: "1",
+        }),
+      });
 
+      const responseData = await response.json();
 
-          <div className="border-t-2 border-gray-400 w-[50%] text-center mt-3">
-            Or
-          </div>
-          <div className="flex flex-col">
-            <button className="provider" disabled>Sign up with Google</button>
-            <button className="provider" disabled>Sign up with Github</button>
-          </div>
-          <div className="mt-3">
-            Having an account already ?{" "}
-            <button
-              onClick={handleChange}
-              className="inline hover:underline text-blue-400"
-            >
-              Log in
-            </button>
+      if (!response.ok || responseData.error) {
+        setError({message : "email already exists" , state : true})
+        throw new Error(responseData.error);
+      }
+
+      if (
+        name &&
+        email &&
+        dob &&
+        responseData.message === "success unique email"
+      ) {
+        setFormData({
+          ...finalData,
+          NAME: name,
+          EMAIL: email,
+          DOB: dob,
+        });
+
+        const response = await fetch(`/api/verify`, {
+          method: "POST",
+          body: JSON.stringify({
+            action: "send",
+            email: email,
+          }),
+        });
+        const responseData = await response.json();
+
+        // if (!response.ok || responseData.error) {
+        //   throw new Error(responseData.error);
+        // }
+
+        if (responseData.message === "sent") {
+          setStep(2);
+        }
+       
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  
+  };
+  
+  return (
+    <div className="h-full w-full bg-black">
+      <form onSubmit={handleSubmit1}>
+        <div className="px-8">
+          <p className=" h-[72px] py-5 text-3xl font-bold ">
+            Create your account
+          </p>
+         <Form secondaryCredentials = {secondaryCredentials}/>
+        </div>
+        {/* next button */}
+       
+          <SubmitForm disabled={false}/>
+       
+      </form>
+    </div>
+  );
+}
+
+function Step2({ setStep ,finalData}) {
+  const handleSubmit2 = async (e) => {
+    try {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const CODE = formData.get("code");
+
+      const response = await fetch(`/api/verify`, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "verify",
+          code: CODE,
+        }),
+      });
+      const responseData = await response.json();
+
+      if (!response.ok || responseData.error) {
+        throw new Error(responseData.error);
+      }
+      if (responseData.message === "code matched") {
+        setStep(3);
+      }
+      return;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const Form = () => {
+   
+    function validatecode(input) {
+      const regex = /^\d{6}$/;
+      return regex.test(input);
+    }
+    return (
+       <Input1 type="text" label="Verification code" name="code" validation = {validatecode} />
+    )
+  }
+  return (
+    <div className="h-full w-full bg-black">
+      <form onSubmit={handleSubmit2}>
+        <div className="px-8">
+          <p className=" h-[72px] py-5 text-3xl font-bold ">
+            We sent you a code
+          </p>
+          <span>Enter it below to verify</span>
+          <p>{finalData?.EMAIL || "temporary38637@gmail.com"}</p>
+         <div className="mt-5">
+          <Form />
           </div>
         </div>
-        <button
-          className="absolute top-3 left-4 w-5 font-bold text-xl hover:bg-slate-800 duration-150"
-          onClick={() => setregisterModalVisible(false)}
-        >
-          X
-        </button>
-      </main>
-    );
-  } catch (error) {
-    console.log(error);
+          <SubmitForm disabled={false}/>
+      </form>
+    </div>
+  );
+}
+
+function Step3({ setStep , setFormData , finalData}) {
+
+  function handleSubmit3(e) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const password = formData.get("password");
+    if(password && password.length > 0){
+      setFormData({
+        ...finalData,
+        PASSWORD: password,
+      });
+      setStep(4)
+    }
   }
+  const Form = () => {
+   
+    function validatepassword(input) {
+      const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+      return regex.test(input);
+    }
+    return (
+       <Input1 type="text" label="Password" name="password" validation = {validatepassword} />
+    )
+  }
+  return (
+    <div className="h-full w-full bg-black">
+    <form onSubmit={handleSubmit3}>
+      <div className="px-8">
+        <p className=" h-[72px] py-5 text-3xl font-bold text-wrap">
+          You'll need a password
+        </p>
+        <p className="mt-8">Make sure it’s 8 characters or more.</p>
+       <div className="mt-5">
+        <Form />
+        </div>
+      </div>
+        <SubmitForm disabled={false}/>
+    </form>
+  </div>
+  );
+}
+
+
+
+function Step4({ setFormData , finalData , handleLogin}) {
+  const [error , setError] = useState(false)
+ 
+ 
+
+  useEffect(() => {
+      const timeout = setTimeout(() => {
+        setError(false);
+      }, 3000);
+      return () => clearTimeout(timeout);
+   
+  }, [error]);
+
+  async function handleSubmit(e){
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    var userid = formData.get("userid");
+    userid = "@"+ userid
+
+    if(!userid && userid.length <= 0){
+      throw new Error("Please enter userid")
+    }
+    setFormData({
+      ...finalData,
+      USERID:userid
+    });
+   
+      try{
+        if(finalData.NAME.length <= 0 || finalData.EMAIL.length <= 0 || finalData.DOB.length <= 0 || finalData.PASSWORD.length <= 0 || finalData.USERID.length <= 0){
+          return 
+        }
+        const response = await fetch(`/api/register`, {
+          method: "POST",
+          body: JSON.stringify({
+            NAME: finalData.NAME,
+            EMAIL: finalData.EMAIL,
+            DOB: finalData.DOB,
+            PASSWORD: finalData.PASSWORD,
+            USERID: finalData.USERID,
+            step: "final"
+          }),
+        });
+        const responseData = await response.json();
+        
+        if (!response.ok || responseData.error) {
+          throw new Error(responseData.error);
+        }
+        if (responseData.message === "user created successfully") {
+          handleLogin()
+        }
+        
+      }
+      catch(e){
+        setError(true)
+        console.error(e)
+      }
+    }
+  
+  const Form = () => {
+   
+    function validatecode(input) {
+      const regex = /^[a-zA-Z0-9_]{3,20}$/;
+      return regex.test(input);
+    }
+    return (
+       <Input1 type="text" label="User Id" name="userid" validation = {validatecode} />
+    )
+  }
+  return (
+    <div className="h-full w-full bg-black">
+      <form onSubmit={handleSubmit}>
+        <div className="px-8">
+          <p className=" h-[72px] py-5 text-3xl font-bold ">
+           Choose your userId
+          </p>
+    
+         <div className="mt-5">
+          <Form />
+          </div>
+          <Useridrecommend username = {finalData?.NAME} />
+        </div>
+          <SubmitForm disabled={false}/>
+      </form>
+    </div>
+  )
+
+}
+
+
+
+const RegisterModal = ({ setregisterModalVisible ,setModalVisible}) => {
+  // const [step, setStep] = useState(() => {
+  //   // if (typeof window !== 'undefined') {
+  //   // const savedStep = localStorage.getItem("step");
+  //   // return savedStep ? parseInt(savedStep, 10) : 1;
+  //   // }
+  //   return 1
+  // });
+  const [step, setStep] = useState(1)
+  const [finalData, setFormData] = useState({
+    NAME: "",
+    EMAIL: "",
+    DOB: "",
+    PASSWORD: "",
+    USERID: "",
+  });
+
+  
+
+  const handleButtonClick = () => {
+    setregisterModalVisible(false);
+   
+    setFormData({
+      NAME: "",
+      EMAIL: "",
+      DOB: "",
+      PASSWORD: "",
+      USERID: "",
+    });
+  };
+  const handleLogin = () => {
+    setModalVisible(true)
+    setregisterModalVisible(false);
+  }
+
+  return (
+    <main className="bg-black h-full w-full">
+      <header className="h-[53px] flex flex-row justify-start px-4 bg-black">
+        <button className="w-[145px]" onClick={handleButtonClick}>
+          <Image src="/cross.svg" height={20} width={20} />
+        </button>
+        <div>
+          <Image
+            src="/download.svg"
+            height={100}
+            width={100}
+            className="h-full w-10"
+          />
+        </div>
+      </header>
+
+      {/* formbody */}
+      {step === 1 && <Step1 setStep={setStep} finalData = {finalData} setFormData={setFormData} />}
+      {step === 2 && <Step2 setStep={setStep} finalData = {finalData} setFormData={setFormData}/>}
+      {step === 3 && <Step3 setStep={setStep} finalData = {finalData} setFormData={setFormData}/>}
+      {step === 4 && <Step4  finalData = {finalData} setFormData={setFormData} handleLogin = {handleLogin}/>}
+    </main>
+  );
 };
 
 export default RegisterModal;

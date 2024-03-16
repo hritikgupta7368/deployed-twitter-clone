@@ -7,10 +7,10 @@ const Register = ({setModalVisible ,setregisterModalVisible}) => {
   <main className="w-full h-full p-4 ">
     <div className="p-5 font-extrabold">
       <div className="w-full h-14 ">
-        <Image src = "/download.jpg" height={56} width = {45}  />
+        <Image src = "/download.svg" height={56} width = {55}  />
       </div>
-      <p className="w-full h-[104px] my-10 " style={{ fontSize: 40}}>Happening now</p>
-      <p className="w-full h-7 mb-5   " style={{ fontSize: 23}}>join today</p>
+      <p className="w-full h-[104px] text-5xl my-10 " >Happening now</p>
+      <p className="w-full h-7 text-3xl mb-5 " >Join today</p>
     </div>
     <div className="w-full ">
     <button className='border-[1px] border-gray-500 rounded-full text-black bg-white font-semibold hover:opacity-75 duration-150 h-10 w-full max-w-[328px]'>Sign up with google</button>

@@ -1,8 +1,6 @@
 "use client";
 import MediaComponent from "./media";
 import TimeElapsed from "@/app/utils/timeago";
-import UserLogo from "../../common/userLogo";
-import Link from "next/link";
 import Image from "next/image";
 
 const PostStructure = ({
@@ -69,7 +67,7 @@ const PostStructure = ({
         <div className=" min-h-5 max-w-full w-full">
           {" "}
           <MediaComponent
-            count={2}
+            count={3}
             mediaArray={media}
             mediaArraySrc={mediaSrc}
           />{" "}
