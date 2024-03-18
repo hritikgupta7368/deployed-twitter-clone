@@ -9,7 +9,7 @@ const CardSection = () => {
   const path = usePathname()
   const session = useSession()
   return (
-  <div className='absolute hidden md:block w-[40.3%] h-full right-0 top-0 bg-red-300 px-2'>
+  <div className='absolute hidden md:block w-[40.3%] h-full right-0 top-0  px-2'>
     {path === '/home' &&
     <div className="w-full">s
       <div className="fixed">

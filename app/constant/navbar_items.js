@@ -26,21 +26,13 @@ export const routes = [
     href: "/messages",
     img: "navbarMenu/grok.svg",
   },
-  {
-    label: "Lists",
-    href: "/messages",
-    img: "navbarMenu/messages.svg",
-  },
+ 
   {
     label: "Bookmarks",
     href: "/messages",
     img: "navbarMenu/messages.svg",
   },
-  {
-    label: "Communities",
-    href: "/messages",
-    img: "navbarMenu/messages.svg",
-  },
+ 
   {
     label: "Premium",
     href: "",

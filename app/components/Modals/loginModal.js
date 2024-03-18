@@ -3,15 +3,61 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { Input1,SubmitForm} from "@/app/(test)/testpage/input";
+
+
+function Step1(){
+  const [error , setError] = useState({message : "" , state : false})
+
+  function validateField(){
+    const regex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{1,7}$/;
+  }
+return (
+  <div className="h-full w-full bg-black">
+      <form>
+        <div className="px-8">
+          <p className=" h-[72px] py-5 text-3xl font-semibold my-5 ">
+          Sign in to X
+          </p>
+         <button type = "button" className="my-2 w-full bg-white text-black h-9 font-bold rounded-full">Sign in with google</button>
+          <Input1 type="text" label="Email, or username" name="field" validation = {validateField} error = {error}/>
+          <button type="submit" className="my-2 w-full bg-white text-black h-9 font-bold rounded-full">Next</button>
+          <p>Don't have an account? <button className="text-Button inline my-3">Sign up</button></p>
+        </div>
+      
+       
+          
+       
+      </form>
+    </div>
+)
+}
+function Step2(){
+  
+}
 
 const LoginModal = ({ setModalVisible, setregisterModalVisible }) => {
   const router = useRouter();
   const session = useSession();
-  const [step, setStep] = useState(1);
-  const [error, setError] = useState();
   const handleChange = () => {
     setregisterModalVisible(true);
     setModalVisible(false);
+  };
+  const [step, setStep] = useState(1)
+  const [finalData, setFormData] = useState({
+    EMAIL: "",
+    PASSWORD: "",
+    USERID: "",
+  });
+
+  const handleButtonClick = () => {
+    setregisterModalVisible(false);
+   
+    setFormData({
+      EMAIL: "",
+      PASSWORD: "",
+      USERID: "",
+    });
   };
 
   useEffect(() => {
@@ -42,41 +88,26 @@ const LoginModal = ({ setModalVisible, setregisterModalVisible }) => {
     async function handleSubmit1() {}
   }
   return (
-    <main className="bg-black h-full w-full md:w-[600px] md:h-[648px] md:rounded-xl md:fixed md:right-32">
-      {/* header */}
-      <header className="h-[53px] flex flex-row  px-4 bg-black bg-green-200 ">
-        <div className="w-[145px] md:w-[270px] flex flex-row justify-start  ">
-        <button className="" onClick={() => setModalVisible(false)}>
-          <Image src="/cross.svg" height={20} width={20} />
-        </button>
-        </div>
-       
-        <div className="bg-yellow-300">
-          <Image
-            src="/download.svg"
-            height={100}
-            width={100}
-            className="h-full w-10"
-          />
-        </div>
-      </header>
+    <main className="bg-black h-full w-full">
+    <header className="h-[53px] flex flex-row justify-start px-4 bg-black">
+      <button className="w-[145px]" onClick={handleButtonClick}>
+        <Image src="/cross.svg" height={20} width={20} />
+      </button>
+      <div>
+        <Image
+          src="/download.svg"
+          height={100}
+          width={100}
+          className="h-full w-10"
+        />
+      </div>
+    </header>
 
-      {/* formbody */}
-      {step === 1 && (
-        <div className="h-full w-full bg-black md:rounded-t-xl">
-          <form>
-            <div className=" bg-red-300">
-              <div>
-                <p className=" h-[72px] py-5 text-3xl font-bold ">
-                  signin to X
-                </p>
-              </div>
-            </div>
-          </form>
-        </div>
-      )}
-      {step === 2 && <div>step 2 enter password</div>}
-    </main>
+    {/* formbody */}
+    {step === 1 && <Step1 setStep={setStep} finalData = {finalData} setFormData={setFormData} />}
+    {step === 2 && <Step2 setStep={setStep} finalData = {finalData} setFormData={setFormData}/>}
+   
+  </main>
   );
 };
 

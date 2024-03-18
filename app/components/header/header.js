@@ -199,7 +199,7 @@ const MainHeader = () => {
 const Navbar_side = () => {
   const session = useSession();
   const router = useRouter();
-  const { handleNavbarSide, showNavbar } = useModal();
+ 
 
   function handleButtonClick(){
     handleNavbarSide()
@@ -207,79 +207,80 @@ const Navbar_side = () => {
   }
 
   return (
-    <div  className={`md:hidden  ${showNavbar ? "fixed z-[15] w-full h-full bg-slate-700/70" : " "} duration-200`}>
-      <div onClick = {handleNavbarSide} className={`md:hidden ${showNavbar ? "z-20 absolute right-0  w-[30%] h-full ":""}`}></div>
+    // <div  className={`md:hidden  ${showNavbar ? "fixed z-[15] w-full h-full bg-slate-700/70" : " "} duration-200`}>
+    //   <div onClick = {handleNavbarSide} className={`md:hidden ${showNavbar ? "z-20 absolute right-0  w-[30%] h-full ":""}`}></div>
         
-        <div className={`md:hidden absolute  w-[77.7%]  h-full  z-20 max-w-[77.7%]  bg-black border-r-[1px] border-white/40 ${showNavbar ? "" : "-translate-x-[280px]"} duration-300 transition-all`}>
-          <div className=" p-4">
-            <div onClick = {handleButtonClick} className="h-10  flex flex-row justify-between">
+    //     <div className={`md:hidden absolute  w-[77.7%]  h-full  z-20 max-w-[77.7%]  bg-black border-r-[1px] border-white/40 ${showNavbar ? "" : "-translate-x-[280px]"} duration-300 transition-all`}>
+    //       <div className=" p-4">
+    //         <div onClick = {handleButtonClick} className="h-10  flex flex-row justify-between">
              
-              <Image
-                src={session.data?.user?.image}
-                height={40}
-                width={40}
-                className="rounded-full"
-              />
+    //           <Image
+    //             src={session.data?.user?.image}
+    //             height={40}
+    //             width={40}
+    //             className="rounded-full"
+    //           />
              
-              <div className="h-full  w-8">+</div>
-            </div>
+    //           <div className="h-full  w-8">+</div>
+    //         </div>
 
-            <div className=" mt-2">
-              <Link href={""} className="text-white font-bold">
-                {session.data?.user?.name}
-              </Link>
-              <p className="text-gray-500">{session.data?.user?.userId}</p>
-            </div>
+    //         <div className=" mt-2">
+    //           <Link href={""} className="text-white font-bold">
+    //             {session.data?.user?.name}
+    //           </Link>
+    //           <p className="text-gray-500">{session.data?.user?.userId}</p>
+    //         </div>
 
-            <div className="mt-3 flex flex-row justify-start text-gray-500 text-sm">
-              <p className="">
-                <span className="text-white font-bold">
-                  {session.data?.user?.following || 0}
-                </span>{" "}
-                Following
-              </p>
-              <p className="ml-3">
-                <span className="text-white font-bold">
-                  {session.data?.user?.followers || 0}
-                </span>{" "}
-                Followers
-              </p>
-            </div>
-          </div>
-          <div className=" ">
-            {routes.map((route, index) => {
-              if (index === 6) {
-                return (
-                  <div className="w-full h-14 ">
-                    <button
-                      onClick={signOut}
-                      className="p-4 flex flex-row justify-start"
-                    >
-                      <Image src={route.img} height={24} width={24} />
-                      <p className="h-6 ml-6 text-white font-bold text-xl">
-                        {route.label}
-                      </p>
-                    </button>
-                  </div>
-                );
-              }
-              return (
-                <div className="w-full h-14 ">
-                  <Link href="" className="p-4 flex flex-row justify-start">
-                    <Image src={route.img} height={24} width={24} />
-                    <p className="h-6 ml-6 text-white font-bold text-xl">
-                      {route.label}
-                    </p>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
+    //         <div className="mt-3 flex flex-row justify-start text-gray-500 text-sm">
+    //           <p className="">
+    //             <span className="text-white font-bold">
+    //               {session.data?.user?.following || 0}
+    //             </span>{" "}
+    //             Following
+    //           </p>
+    //           <p className="ml-3">
+    //             <span className="text-white font-bold">
+    //               {session.data?.user?.followers || 0}
+    //             </span>{" "}
+    //             Followers
+    //           </p>
+    //         </div>
+    //       </div>
+    //       <div className=" ">
+    //         {routes.map((route, index) => {
+    //           if (index === 6) {
+    //             return (
+    //               <div className="w-full h-14 ">
+    //                 <button
+    //                   onClick={signOut}
+    //                   className="p-4 flex flex-row justify-start"
+    //                 >
+    //                   <Image src={route.img} height={24} width={24} />
+    //                   <p className="h-6 ml-6 text-white font-bold text-xl">
+    //                     {route.label}
+    //                   </p>
+    //                 </button>
+    //               </div>
+    //             );
+    //           }
+    //           return (
+    //             <div className="w-full h-14 ">
+    //               <Link href="" className="p-4 flex flex-row justify-start">
+    //                 <Image src={route.img} height={24} width={24} />
+    //                 <p className="h-6 ml-6 text-white font-bold text-xl">
+    //                   {route.label}
+    //                 </p>
+    //               </Link>
+    //             </div>
+    //           );
+    //         })}
+    //       </div>
 
 
-      </div> 
+    //   </div> 
       
-      </div>
+    //   </div>
+    <div></div>
    
   );
 };

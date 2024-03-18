@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .parent {
+      @apply bg-black w-full min-w-[300px] h-[58px]  block relative text-xl mb-8 max-w-[450px]
+    }
+    .input {
+        @apply pl-4 font-sans h-[58px] w-full rounded-md outline-none border-[1px] border-slate-600 focus:outline-[#38bdf8] focus:border-none outline-2 focus:outline bg-black md:max-w-[440px]
+    }
+    .label {
+        @apply text-lg text-gray-600 transition duration-75 absolute peer-focus:text-sm peer-focus:text-[#38bdf8] peer-focus:-translate-x-1 peer-focus:-translate-y-3 left-3 top-3 
+    }
+    .label1 {
+        @apply absolute text-[#38bdf8] text-sm left-[8px] top-0
+    }
+    .error {
+        @apply hidden peer-focus:inline peer-focus:text-sm peer-focus:text-red-500 peer-focus:absolute peer-focus:left-1 peer-focus:top-[65px]
+    }
+  }

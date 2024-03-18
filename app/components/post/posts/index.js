@@ -80,7 +80,7 @@ const PostsType = ({ type }) => {
 
   return (
     <InfiniteScroll
-      dataLength={posts.length || 0}
+      dataLength={posts?.length ? posts.length : 0}
       next={fetchNewPosts}
       hasMore={hasMore}
       loader={<Loading />}

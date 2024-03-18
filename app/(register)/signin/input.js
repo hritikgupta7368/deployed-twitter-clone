@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import "./globals.css"
+import "../globals.css"
 
 
 const Input1 = ({
@@ -9,7 +9,8 @@ const Input1 = ({
     label,
     validation,
     error,
-    setError
+    disabled,
+    value
 
 }) => {
     const [Input, setInput] = useState({ value: "", error: false });
@@ -22,8 +23,8 @@ const Input1 = ({
 
     return (
        <label className="parent ">
-            <input  name={name} type={type} class={` peer input ${Input.error=== true ? " focus:outline-red-500":" "}`} value={Input.value} required onChange={handleChange}/>
-            <label className={`  ${Input.value.length > 0 ? `label1 ${Input.error === true ? "text-red-500 ":""}`:"label"}`}>{label}</label>
+            <input  disabled = {disabled} name={name} type={type} className={`${disabled? " bg-gray-800 opacity-50":""} peer input ${Input.error=== true ? " focus:outline-red-500":" "}`} value={value? value : Input.value} required onChange={handleChange}/>
+            <label className={` ${disabled? " bg-gray-800 opacity-50":""} ${value || Input.value.length > 0 ? `label1 ${Input.error === true ? "text-red-500 ":""}`:"label"}`}>{label}</label>
             <span className= "error">
                 {Input.error === true && name === 'email' && "Please input valid email"}
                 {Input.error === true && name === 'name' && "Please input valid name"}
@@ -47,7 +48,7 @@ const DateInput = ({ type,
    }
 
     return (
-      <div className=" w-full py-3 min-w-[300px] text-gray-600 ">
+      <div className=" w-full py-3 min-w-[300px] max-w-[450px] text-gray-600 ">
         <div className="h-full w-full min-h-[58px] relative ">
           <label
             className={`z-10 absolute transition duration-75 ${

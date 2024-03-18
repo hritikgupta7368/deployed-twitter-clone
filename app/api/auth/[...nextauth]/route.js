@@ -6,6 +6,7 @@ import prisma from "@/app/lib/prismadb";
 import { getServerSession } from "next-auth";
 
 
+
 export const authOptions = {
   pages:{
    signIn: "/signin",
@@ -17,18 +18,19 @@ export const authOptions = {
       async authorize(credentials, req) {
         try {
             const session = await getServerSession()
-          if (credentials.userId) {
-            const user = await prisma.user.findUnique({
+          if (credentials.Primary) {
+            const user = await prisma.user.findFirst({
               where: {
-                userId: credentials.userId,
+                OR: [
+                  { userId: credentials.Primary },
+                  { email: credentials.Primary },
+                ],
               },
             });
-            const passwordCorrect = await compare(credentials.password,user.hashedPassword)
+            const passwordCorrect = await compare(credentials.Password,user.hashedPassword)
 
             if(passwordCorrect){
                 console.log("login successful")
-               
-                
                 return user
             }
           }

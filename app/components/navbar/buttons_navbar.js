@@ -6,26 +6,22 @@ import { useState } from "react";
 import Link from "next/link";
 import UserLogo from "../common/userLogo";
 import Image from "next/image";
+import { Button } from "@/components/ui/button"
 
 function Button_Post() {
-  const { handleModal } = useModal();
+  
 
   return (
-    <button
-      onClick={() => handleModal("createPost")}
-      className="fixed z-10 bottom-20 right-7 w-20 h-10 md:mt-2 blue_button md:w-full text-xl rounded-full md:h-10 md:w-10"
-    >
-      Post
-    </button>
+    <Button variant = "createpost"  className="hover:opacity-80 rounded-full w-full h-12">Post</Button>
   );
 }
 
 function Button_PremiumCard({ src, label, key }) {
-  const { handleModal } = useModal();
+ 
   if (true) {
     return (
       <div
-        onClick={() => handleModal("premium")}
+        
         className="hidden h-[50.25px] w-[259px] max-h-[50.25px]  max-w-[259px]"
         key={key}
       >
@@ -51,7 +47,7 @@ function UserSessionCard() {
   if (session) {
     return (
       <>
-        <div className="hover:bg-[#16181c] rounded-full duration-200 h-[65.5px] max-h-[65.5px] w-[259px] ">
+        <div className="hover:bg-[#16181c] rounded-full duration-200  max-h-[65.5px] w-[259px] ">
           <div className="flex flex-row items-center h-full w-full py-[12.5px]">
             <UserLogo logo={session?.user.image} />
             <div className=" flex flex-col justify-center h-[40px] w-[151px]  px-[12px]">
@@ -102,10 +98,10 @@ function MoreOption({ src, label, key }) {
         onClick={() => {
           setShowButton(!showButton);
         }}
-        className="h-[50.25px] w-[259px] max-h-[50.25px]  max-w-[259px]"
+        className="h-[50.25px] w-[259px] max-h-[50.25px]   max-w-[259px]"
         key={key}
       >
-        <div className="w-full h-full rounded-3xl hover:bg-[#16181c] duration-200">
+        <div className="w-full h-full rounded-3xl hover:bg-[#16181c] duration-200 ">
           <div className="w-[143px] max-w-[143px] h-[50.25px] flex flex-row items-center ">
             <div className="max-w-[26.25px] max-h-[26.25px]">
               <Image src={src} height={26.25} width={26.25} alt="Picture of the author" />

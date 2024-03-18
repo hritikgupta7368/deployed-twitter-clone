@@ -1,19 +1,19 @@
-
-import { Header ,Navbar_side } from "@/app/components/header/header";
+import { Navbar_side } from "@/app/components/header/header";
+import Header from "@/app/components/common/header";
 import CardSection from "@/app/components/container/cardsection";
 import Homeposts from "@/app/components/post/posts";
-
+import Footer from "@/app/components/common/footer";
 
 const Home = async () => {
 
   return (
-    <main className="md:ml-[275px]  h-full w-full overflow-y-auto">
-    <Navbar_side />
+    <main className=" bg-black  h-full w-full overflow-y-auto ">
+   
     <Header />
     <div className=" w-full h-full pt-[114px] md:pt-[54px]">
-        <Homeposts />
+        {/* <Homeposts /> */}
     </div>
-    <CardSection />
+    <Footer />
    </main>
   );
 };

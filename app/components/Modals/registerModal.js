@@ -1,6 +1,6 @@
 "use client"
 import Useridrecommend from "@/app/services/algo/useridrecommend";
-import { Input1,SubmitForm,DateInput} from "@/app/services/input/input";
+import { Input1,SubmitForm,DateInput} from "@/app/(test)/testpage/input";
 import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 

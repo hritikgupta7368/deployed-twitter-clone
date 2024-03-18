@@ -1,48 +1,20 @@
-"use client";
-import LoginModal from "../components/Modals/loginModal";
-import "../globals.css";
-import { useState } from "react";
-import Register from "./signin/page";
-import RegisterModal from "../components/Modals/registerModal";
-import SessionProvider from "../providers/provider";
-import { Providers } from "../providers/nextuiprovider";
+import { Inter as FontSans } from "next/font/google"
+import { cn } from "@/lib/utils"
+import "./globals.css"
+import Footer from "./footer"
 
-export default function RootLayout() {
-  const [loginmodalVisible, setModalVisible] = useState(false);
-  const [registermodalVisible, setregisterModalVisible] = useState(true);
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
-  return (
-    <html lang="en">
-      <body className="w-full h-full">
-        <SessionProvider>
-          <Providers>
-            <main className="w-full h-full overflow-y-auto">
-              <Register
-                setregisterModalVisible={setregisterModalVisible}
-                setModalVisible={setModalVisible}
-              />
-              <footer>footer</footer>
-            </main>
-
-            {registermodalVisible && !loginmodalVisible && (
-              <div className=" fixed bg-slate-600/70 inset-0">
-                <RegisterModal
-                  setModalVisible={setModalVisible}
-                  setregisterModalVisible={setregisterModalVisible}
-                />
-              </div>
-            )}
-            {!registermodalVisible && loginmodalVisible && (
-              <div className=" fixed bg-slate-600/70 inset-0">
-                <LoginModal
-                  setregisterModalVisible={setregisterModalVisible}
-                  setModalVisible={setModalVisible}
-                />
-              </div>
-            )}
-          </Providers>
-        </SessionProvider>
+export default function RootLayout({ children }) {
+ return (
+  <html lang="en" suppressHydrationWarning>
+      <body className="bg-black text-white">
+        {children}
+        <Footer />
       </body>
     </html>
-  );
+  )
 }
