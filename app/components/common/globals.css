@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+   
+    .footer {
+        @apply md:hidden fixed bottom-0 block w-full  h-[53.5px]
+    }
+    .footer_container {
+        @apply w-full h-full flex flex-row justify-between items-center  gap-1
+    }
+    .footer_trigger {
+        @apply  h-full w-full 
+    }
+    .footer_trigger_child {
+        @apply flex flex-row justify-center h-full w-full 
+    }
+    .footer_trigger_link {
+        @apply  h-full w-full 
+    }
+
+
+
+    .header {
+        @apply md:max-w-[600px] fixed top-14 md:top-0 block w-full h-[53.5px] md:border-x-[1px] border-b-[1px] border-slate-600
+    }
+    .header_container {
+        @apply w-full h-full flex flex-row justify-between items-center 
+    }
+    .header_trigger {
+        @apply  h-full w-full text-white hover:bg-slate-700 duration-200 transition-all
+    }
+    .header_trigger_child {
+        @apply flex flex-row justify-center items-center h-full w-full text-white font-semibold text-base 
+    }
+
+
+    .header_top_container {
+        @apply md:hidden flex flex-row justify-between items-center px-4  h-14 w-full
+    }
+    .header_top_container_child1 {
+        @apply w-14 h-full flex flex-row items-center
+    }
+    .header_top_container_child2 {
+        @apply h-full w-9 flex flex-row items-center 
+    }
+    .header_top_container_child3 {
+        @apply w-14 h-full flex flex-row justify-end items-center
+    }
+  }
+  /* [#38bdf8] */

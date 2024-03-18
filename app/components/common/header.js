@@ -1,17 +1,45 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs,  TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from "next/image"
+import { Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger,} from "@/components/ui/sheet"
 
-
-const Header = () => {
+const Navbar_side = () => {
+    return (
+      <SheetContent side = "left" className="w-[270px] md:hidden bg-black text-white border-none">
+      navbar
+    </SheetContent>
+    )
+  
+  }
+const Header =  () => {
+    const HeaderTop = () => {
+        return (
+            <div className="header_top_container">
+                    <Sheet >
+                    <SheetTrigger asChild>
+                    <button className="header_top_container_child1">
+                    <Image
+                        src=""
+                        height={32}
+                        width={32}
+                        className="rounded-full"
+                    />
+                    </button>
+                    </SheetTrigger>
+                    <Navbar_side />
+                    </Sheet>
+               <div className="header_top_container_child2"><Image src = "/download.jpg" height={20} width={22} quality={100} className="w-full"/></div>
+               <div className="header_top_container_child3"><Image src="/common/settings.svg" height={20} width={20} quality={10} /></div>
+            </div>
+        )
+    }
   return (
     <div>
-      <Tabs defaultValue="foryou" className="md:max-w-[600px]  w-full text-white bg-green-200">
-        <TabsList>
-        <TabsTrigger className = "md:hidden" value="navbarside">navbarside</TabsTrigger>
-        <TabsTrigger value="foryou">For you</TabsTrigger>
-        <TabsTrigger value="following">Following</TabsTrigger>
+        <HeaderTop />
+      <Tabs defaultValue="foryou" className="header">
+        <TabsList className ="header_container">
+            <TabsTrigger value="foryou" className = "header_trigger"><span className="header_trigger_child">For you</span></TabsTrigger>
+            <TabsTrigger value="following" className = "header_trigger"><span className="header_trigger_child">Following</span></TabsTrigger>
         </TabsList>
-        <TabsContent value="foryou">Make changes to your account here.</TabsContent>
-        <TabsContent value="following">Change your password here.</TabsContent>
         </Tabs>
     </div>
   )

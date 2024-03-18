@@ -5,7 +5,7 @@ import { routes } from "@/app/constant/navbar_items";
 import {Popover,PopoverContent,PopoverTrigger,} from "@/components/ui/popover"
 import { Dialog,DialogTrigger,} from "@/components/ui/dialog"
 import RegisterModal from "@/app/(register)/signin/registermodal";
-import {Sheet, SheetTrigger,} from "@/components/ui/sheet"
+
 
 const Navbar = () => {
   function LinkButton({src ,label ,key ,href}){
@@ -63,7 +63,7 @@ const Navbar = () => {
     )
   }
   return (
-    <main className="hidden md:block  md:w-[275px] md:h-full z-10 text-white  bg-red-300  px-[8px]  md:flex-col md:justify-between ">
+    <main className="hidden md:block  md:w-[275px] md:h-full z-10 text-white   px-[8px]  md:flex-col md:justify-between ">
             <div className=" max-h-[52px] max-w-[52px] h-[52px] w-[52px]">
               <div className="h-[50px] w-[50px]">
                 <Image
@@ -96,47 +96,8 @@ const Navbar = () => {
           <UserSessionCard />
       
 
-
-
-      {/* bottom navabr */}
-      <div className="md:hidden flex flex-row justify-between items-center  fixed bottom-0 w-full bg-black border-t-[1px] border-[#2f3336] h-[53.5px]">
-
-          <Link href = {"/home"} className="w-1/5 h-full border-b-[2px] border-black">
-              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
-                <Image src = "navbarMenu/home.svg" height={26.5} width={26.5} />
-              </div>
-          </Link>
-          <Link href = {"/explore"} className="w-1/5 h-full border-b-[2px] border-black">
-              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
-                <Image src = "navbarMenu/search.svg" height={26.5} width={26.5} />
-              </div>
-          </Link>
-          <Link href = {""} className="w-1/5 h-full border-b-[2px] border-black">
-              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
-                <Image src = "navbarMenu/grok.svg" height={26.5} width={26.5} />
-              </div>
-          </Link>
-          <Link href = {"/notifications"} className="w-1/5 h-full border-b-[2px] border-black">
-              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
-                <Image src = "navbarMenu/notifications.svg" height={26.5} width={26.5} />
-              </div>
-          </Link>
-          <Link href = {"/messages"} className="w-1/5 h-full border-b-[2px] border-black">
-              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
-                <Image src = "navbarMenu/messages.svg" height={26.5} width={26.5} />
-              </div>
-          </Link>
-      </div>
-
     </main>
   );
 };
-const Navbar_side = () => {
-  return (
-    <Sheet>
-      navbar side
-    </Sheet>
-  )
 
-}
 export default Navbar

@@ -2,10 +2,10 @@ import SessionProvider from "../providers/provider";
 import "../globals.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-import Modals from "../components/Modals/modal";
 import { ContextProvider } from "../providers/contextprovider";
 import Navbar from "../components/navbar/navbar";
 import { Providers } from "../providers/nextuiprovider";
+import Footer from "../components/common/footer";
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
@@ -16,11 +16,11 @@ export default async function RootLayout({ children }) {
         <SessionProvider session={session}>
           <Providers>
             <ContextProvider>
-              <Modals />
               <div className="flex flex-row h-full bg-black">
                 <Navbar />
                 {children}
               </div>
+              <Footer />
             </ContextProvider>
           </Providers>
         </SessionProvider>

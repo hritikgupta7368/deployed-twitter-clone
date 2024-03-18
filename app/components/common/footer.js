@@ -1,28 +1,51 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 import Image from "next/image"
+import "./globals.css"
 
 const Footer = () => {
-    function Option(){
-        <Link href = {"/home"} className="w-1/5 h-full border-b-[2px] border-black">
-              <div className="mt-[6px] mx-2 mb-2 p-2 flex flex-row justify-center items-center">
-                <Image src = "navbarMenu/home.svg" height={26.5} width={26.5} />
-              </div>
-          </Link>
-    }
+  
   return (
-    <Tabs defaultValue="home" className="md:hidden fixed bottom-0 block w-full">
-        <TabsContent value="home">home</TabsContent>
-        <TabsContent value="explore">explore</TabsContent>
-        <TabsContent value="grok">grok</TabsContent>
-        <TabsContent value="notifications">notifications</TabsContent>
-        <TabsContent value="messages">messages</TabsContent>
-        <TabsList className = "w-full  flex flex-row justify-between items-center">
-        <TabsTrigger className = "h-[53.5px]" value="home"><Option href = "/home" src ="navbarMenu/home.svg" /></TabsTrigger>
-        <TabsTrigger value="explore"><Option href = "/home" src ="navbarMenu/home.svg" /></TabsTrigger>
-        <TabsTrigger value="grok"><Option href = "/home" src ="navbarMenu/home.svg" /></TabsTrigger>
-        <TabsTrigger value="notifications"><Option href = "/home" src ="navbarMenu/home.svg" /></TabsTrigger>
-        <TabsTrigger value="messages"><Option href = "/home" src ="navbarMenu/home.svg" /></TabsTrigger>
+    <Tabs defaultValue="home" className="footer">
+        <TabsList className ="footer_container">
+
+        <TabsTrigger className = "footer_trigger" value="home">
+            <Link href = "/home" className="footer_trigger_link">
+                <div className="footer_trigger_child">
+                    <Image src = "navbarMenu/home.svg"  height={26.5} width={26.5} />
+                </div>  
+            </Link>
+        </TabsTrigger>
+        <TabsTrigger className = "footer_trigger" value="explore">
+            <Link href = "/explore" className="footer_trigger_link">
+                <div className="footer_trigger_child">
+                    <Image src = "navbarMenu/search.svg" height={26.5} width={26.5} />
+                </div>  
+            </Link>
+        </TabsTrigger>
+        <TabsTrigger className = "footer_trigger" value="grok">
+            <Link href = "/grok" className="footer_trigger_link">
+                <div className="footer_trigger_child">
+                    <Image src = "navbarMenu/grok.svg" height={26.5} width={26.5} />
+                </div>  
+            </Link>
+        </TabsTrigger>
+        <TabsTrigger className = "footer_trigger" value="notifications">
+            <Link href = "/notifications" className="footer_trigger_link">
+                <div className="footer_trigger_child">
+                    <Image src = "navbarMenu/notifications.svg" height={26.5} width={26.5} />
+                </div>  
+            </Link>
+        </TabsTrigger>
+        <TabsTrigger className = "footer_trigger" value="messages">
+            <Link href = "/messages" className="footer_trigger_link">
+                <div className="footer_trigger_child">
+                    <Image src = "navbarMenu/messages.svg" height={26.5} width={26.5} />
+                </div>  
+            </Link>
+        </TabsTrigger>
+       
+
         </TabsList>
        
     </Tabs>
