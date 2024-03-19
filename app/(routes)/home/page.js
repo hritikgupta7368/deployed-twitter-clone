@@ -1,7 +1,7 @@
-import Header from "@/app/components/common/header";
+import Header from "./components/header";
 import CardSection from "@/app/components/container/cardsection";
 import Homeposts from "@/app/components/post/posts";
-
+import "./globals.css"
 const Home = async () => {
 
   return (

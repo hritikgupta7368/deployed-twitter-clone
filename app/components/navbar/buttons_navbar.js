@@ -4,7 +4,7 @@ import { signOut } from "next-auth/react";
 import { useModal } from "@/app/providers/contextprovider";
 import { useState } from "react";
 import Link from "next/link";
-import UserLogo from "../common/userLogo";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button"
 
@@ -49,7 +49,7 @@ function UserSessionCard() {
       <>
         <div className="hover:bg-[#16181c] rounded-full duration-200  max-h-[65.5px] w-[259px] ">
           <div className="flex flex-row items-center h-full w-full py-[12.5px]">
-            <UserLogo logo={session?.user.image} />
+            
             <div className=" flex flex-col justify-center h-[40px] w-[151px]  px-[12px]">
               <div className="font-bold">{session?.user.name}</div>
               <div className="text-medium text-gray-400/70">

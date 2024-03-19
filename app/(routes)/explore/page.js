@@ -4,8 +4,8 @@ import FollowRecommend from "@/app/components/cards/follow_card";
 import Homeposts from "@/app/components/post/posts";
 import Options_explore from "@/app/components/options/explore";
 import { ShowTrends } from "@/app/components/cards/happening_card";
-import { Navbar_side } from "@/app/components/header/header";
-import { Header } from "@/app/components/header/header";
+import Header from "./components/header";
+import "./globals.css"
 
 
 
@@ -20,13 +20,11 @@ const CardSection = () => {
 const Explore = async() => {
 
   return (
-    <main className="md:pl-[275px] relative h-full w-full overflow-y-auto">
-      <Navbar_side />
-      <Header />
-      <div className=" w-full h-full pt-[114px] md:pt-[54px]">
-        <Homeposts />
-      </div>
-      <CardSection />
+    <main className=" bg-black  h-full w-full overflow-y-auto ">
+    <Header />
+    <div className=" w-full h-full pt-[114px] md:pt-[54px]">
+        {/* <Homeposts /> */}
+    </div>
    </main>
   );
 };

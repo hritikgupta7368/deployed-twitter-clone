@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+   
+    .message_header_top_container {
+        @apply md:hidden flex flex-row justify-between items-center px-4  h-14 w-full md:border-x-[1px] border-b-[1px] border-slate-600
+    }
+    .message_header_top_container_child1 {
+        @apply w-14 h-full flex flex-row items-center
+    }
+    .message_header_top_container_childimage {
+        @apply h-full w-9 flex flex-row items-center 
+    }
+    .message_header_top_container_child3 {
+        @apply w-14 h-full flex flex-row justify-end items-center
+    }
+  }
+  /* [#38bdf8] */

@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+   
+   
+    .header {
+        @apply md:max-w-[600px] fixed top-14 md:top-0 block w-full h-[53.5px] md:border-x-[1px] border-b-[1px] border-slate-600
+    }
+    .header_container {
+        @apply w-full h-full flex flex-row justify-between items-center overflow-x-auto
+    }
+    .header_trigger {
+        @apply  h-full w-full text-white hover:bg-slate-700 duration-200 transition-all
+    }
+    .header_trigger_child {
+        @apply flex flex-row justify-center items-center h-full w-full text-white font-semibold text-base 
+    }
+
+
+    .header_top_container {
+        @apply md:hidden flex flex-row justify-between items-center   h-14 w-full
+    }
+    .header_top_container_child1 {
+        @apply w-14 h-full flex flex-row items-center
+    }
+    .header_top_container_childinput {
+        @apply h-8 w-[60%] flex flex-row items-center rounded-full bg-black border-[1px] border-slate-700 text-white/30 px-2
+    }
+    .header_top_container_child3 {
+        @apply w-14 h-full flex flex-row justify-end items-center
+    }
+  }
+  /* [#38bdf8] */

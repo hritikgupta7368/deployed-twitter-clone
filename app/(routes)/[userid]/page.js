@@ -10,7 +10,7 @@ import { Trending_Card } from "@/app/components/cards/happening_card";
 import FollowRecommend_Card from "@/app/components/cards/follow_card";
 import { Edit_profile } from "@/app/components/navbar/buttons_navbar";
 import Image from "next/image";
-import { Header } from "@/app/components/header/header";
+
 
 
 

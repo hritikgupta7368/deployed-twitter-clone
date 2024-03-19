@@ -1,11 +1,18 @@
-import React from 'react'
+import Header from "./components/header";
+import CardSection from "@/app/components/container/cardsection";
+import Homeposts from "@/app/components/post/posts";
+import "./globals.css"
+const Home = async () => {
 
-const Messages = () => {
   return (
-    <div className='w-[400px] h-full border-r-[1px] border-[#2f3336]'>
-      
+    <main className=" bg-black  h-full w-full overflow-y-auto ">
+    <Header />
+    <div className=" w-full h-full pt-[114px] md:pt-[54px]">
+        {/* <Homeposts /> */}
+        messages
     </div>
-  )
-}
+   </main>
+  );
+};
 
-export default Messages
+export default Home;

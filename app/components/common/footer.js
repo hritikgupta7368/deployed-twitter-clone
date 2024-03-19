@@ -1,13 +1,12 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Link from "next/link"
 import Image from "next/image"
 import "./globals.css"
 
 const Footer = () => {
-  
   return (
     <Tabs defaultValue="home" className="footer">
-        <TabsList className ="footer_container">
+        <TabsList className = "footer_container ">
 
         <TabsTrigger className = "footer_trigger" value="home">
             <Link href = "/home" className="footer_trigger_link">
